@@ -29,12 +29,12 @@ export const Navigation = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/95 backdrop-blur-md shadow-md" : "bg-transparent"
+        scrolled ? "bg-background/95 backdrop-blur-md shadow-md glow-effect" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          <a href="#hero" className="text-xl lg:text-2xl font-bold gradient-text">
+          <a href="#hero" className="text-xl lg:text-2xl font-bold gradient-text font-heading">
             COULIBALY Issa
           </a>
 
@@ -44,7 +44,7 @@ export const Navigation = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className="px-3 lg:px-4 font-lora py-2 text-sm lg:text-base text-foreground hover:text-primary transition-colors rounded-lg hover:bg-muted"
+                className="px-3 lg:px-4 py-2 text-sm lg:text-base text-foreground hover:text-primary transition-colors rounded-lg hover:bg-muted hover-glow font-body"
               >
                 {item.name}
               </Link>
