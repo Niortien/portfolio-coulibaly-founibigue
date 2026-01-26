@@ -7,8 +7,8 @@ const experiences = [
     company: "LUNION-LAB",
     role: "Stage Développeur Web",
     location: "Abidjan, Cocody",
-    duration: "3 mois",
-    period: "2024",
+    duration: "6 mois",
+    period: "2025-2026",
     tasks: [
       "Réalisation et conception de l'application web e-commerce LUXTIME avec Next.js et Tailwind CSS",
       "Participation à la refonte du site CHIKEN-NATION de l'entreprise avec Next.js, React.js et Tailwind CSS",
@@ -32,7 +32,7 @@ const experiences = [
     role: "Stage Développeur Web",
     location: "Abidjan, Vridi",
     duration: "4 mois",
-    period: "2023",
+    period: "2024-2025",
     tasks: [
       "Installation de la fibre des caméras du PCA",
       "Conception d'une application web avec la méthode MERISE",
