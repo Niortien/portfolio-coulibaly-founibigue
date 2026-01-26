@@ -25,7 +25,7 @@ export const Hero = () => {
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 lg:mb-6 font-heading">
               <span className="gradient-text">COULIBALY</span>
               <br />
-              <span className="text-foreground">Founibigue Issa</span>
+              <span className="text-foreground">Founibigue Issa Niortien</span>
             </h1>
             <p className="text-xl sm:text-2xl lg:text-3xl text-muted-foreground mb-6 lg:mb-8 font-heading">
               Développeur Web Full-Stack

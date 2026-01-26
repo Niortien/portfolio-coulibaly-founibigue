@@ -22,12 +22,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio - Coulibaly Founibigue",
+  title: "Portfolio - Coulibaly Founibigue Issa Niortien",
   description: "Développeur web passionné, spécialisé dans la création d'applications modernes et performantes. Découvrez mes projets, compétences et parcours professionnel.",
-  keywords: ["développeur web", "portfolio", "Coulibaly Founibigue", "web development", "React", "Next.js", "TypeScript"],
-  authors: [{ name: "Coulibaby Founibigue" }],
+  keywords: ["développeur web", "portfolio", "Coulibaly Founibigue Issa Niortien", "web development", "React", "Next.js", "TypeScript"],
+  authors: [{ name: "Coulibaly Founibigue Issa Niortien" }],
   openGraph: {
-    title: "Portfolio - Coulibaly Founibigue",
+    title: "Portfolio - Coulibaly Founibigue Issa Niortien",
     description: "Développeur web passionné, spécialisé dans la création d'applications modernes et performantes.",
     type: "website",
     locale: "fr_FR",

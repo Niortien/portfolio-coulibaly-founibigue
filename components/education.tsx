@@ -20,6 +20,14 @@ const education = [
 ];
 
 const certifications = [
+    {
+    title: "Python pour l'Analyse de Données",
+    organization: "GOMYCODE",
+    period: "Août 2022 - Décembre 2022",
+    description:
+      "Formation de 3 mois sur les bases de Python pour l'analyse de données et la programmation.",
+    technologies: ["Python", "Data Analysis", "Pandas","Numpy","Matplotlib","Pandas"],
+  },
   {
     title: "Full-Stack Bootcamp JavaScript",
     organization: "GOMYCODE",
@@ -28,29 +36,14 @@ const certifications = [
       "Formation intensive de 9 mois sur le stack MERN (MongoDB, Express.js, React.js, Node.js). Apprentissage du développement Full-Stack moderne avec JavaScript.",
     technologies: ["MongoDB", "Express.js", "React.js", "Node.js", "JavaScript"],
   },
+
   {
-    title: "Développement Backend avec Nest.js",
-    organization: "GOMYCODE",
+    title: "Développement Full-Stack avec Next.js front-end et  Nest.js back-end",
+    organization: "LUNION-LAB",
     period: "Formation complémentaire",
     description:
-      "Maîtrise du framework Nest.js pour la création d'APIs robustes et scalables avec MongoDB.",
-    technologies: ["Nest.js", "MongoDB", "TypeScript"],
-  },
-  {
-    title: "Développement Mobile avec Flutter",
-    organization: "GOMYCODE",
-    period: "Formation complémentaire",
-    description:
-      "Apprentissage du développement d'applications mobiles cross-platform avec Flutter et Dart.",
-    technologies: ["Flutter", "Dart", "Mobile Development"],
-  },
-  {
-    title: "Python pour l'Analyse de Données",
-    organization: "GOMYCODE",
-    period: "Août 2022 - Décembre 2022",
-    description:
-      "Formation de 3 mois sur les bases de Python pour l'analyse de données et la programmation.",
-    technologies: ["Python", "Data Analysis", "Pandas"],
+      "Maîtrise du framework Nest.js pour la création d'APIs robustes et scalables avec Nest.js et Next.js pour le front-end.",
+    technologies: ["Nest.js", "Next.js", "TypeScript","Node.js","PostgreSQL","React.js","JavaScript"],
   },
 ];
 
