@@ -10,19 +10,56 @@ const experiences = [
     duration: "6 mois",
     period: "2025-2026",
     tasks: [
-      "Réalisation et conception de l'application web e-commerce LUXTIME avec Next.js et Tailwind CSS",
-      "Participation à la refonte du site CHIKEN-NATION de l'entreprise avec Next.js, React.js et Tailwind CSS",
+      "Création d'API REST en Nest.js pour la gestion des données",
+      "Réalisation du site officiel de l'entreprise avec Next.js et React",
+      "Configuration de TPE (Terminal de Paiement Électronique)",
+      "Développement du backend robuste avec Nest.js et PostgreSQL",
     ],
-    technologies: ["Next.js", "React.js", "Tailwind CSS", "JavaScript", "E-commerce"],
+    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "API REST","MongoDB","Express.js"],
     projects: [
       {
-        name: "LUXTIME",
-        description: "Application web e-commerce moderne et responsive",
+        name: "Turbo ERP",
+        description: "Système de gestion intégré pour les entreprises",
+        link: "https://admin-erp.turbodeliveryapp.com/analystics",
+      },
+      {
+        name: "Turbo Finance",
+        description: "Application de gestion financière et comptabilité",
         link: "#",
       },
       {
-        name: "CHIKEN-NATION",
-        description: "Refonte complète du site web de l'entreprise",
+        name: "Chicken-Nation",
+        description: "Site officiel de du fast food et l'application de gestion web de commandes de Chicken-Nation",
+        link: "#",
+      },
+      {
+        name: "Lunion-Lab-Website",
+        description: "Site officiel de Lunion-Lab",
+        link: "https://www.lunion-lab.com/",
+      },
+      {
+        name: "Sidi Immobilier",
+        description: "Plateforme immobilière pour Sidi Immobilier",
+        link: "https://sidi.lunion-lab.com/fr",
+      },
+      {
+        name: "Luxury Home Abidjan",
+        description: "Site immobilier pour les logements de luxe à Abidjan",
+        link: "https://lha.lunion-lab.com/",
+      },
+      {
+        name: "Catholikia",
+        description: "Application pour la communauté catholique",
+        link: "#",
+      },
+      {
+        name: "OSA FC",
+        description: "Site officiel du club de football OSA FC",
+        link: "#",
+      },
+      {
+        name: "Paroisse St Sauveur",
+        description: "Site web pour la paroisse Saint Sauveur",
         link: "#",
       },
     ],

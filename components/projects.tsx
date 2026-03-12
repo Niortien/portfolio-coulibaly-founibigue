@@ -64,6 +64,116 @@ const projects = [
     github: "https://github.com/your-username/flutter-app",
     type: "Personnel",
   },
+  {
+    title: "Université Polytechnique de Bingerville",
+    description:
+      "Site officiel de l'université Polytechnique de Bingerville. Plateforme moderne et responsive pour présenter l'établissement et ses formations.",
+    technologies: ["Next.js", "React.js", "Vercel", "Web Design", "Éducation"],
+    image: "/assets/image/téléchargement (3).jpg",
+    link: "https://univeriste-polytechnique-de-bingerville.vercel.app/",
+    github: "#",
+    type: "Personnel",
+  },
+  {
+    title: "Stock-Pro",
+    description:
+      "Application de gestion de stock complète. Solution moderne pour le suivi des inventaires, la gestion des produits et les opérations de stock.",
+    technologies: ["Next.js", "React.js", "Vercel", "Gestion de stock", "Inventaire", "Dashboard"],
+    image: "/assets/image/téléchargement (3).jpg",
+    link: "https://stock-pro-six.vercel.app/stock",
+    github: "#",
+    type: "Personnel",
+  },
+  {
+    title: "Turbo ERP",
+    description:
+      "Système de gestion intégré (ERP) pour les entreprises. Solution complète pour la gestion des opérations, des ressources et des processus métiers.",
+    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "API REST", "MongoDB", "Express.js"],
+    image: "/assets/image/téléchargement (3).jpg",
+    link: "https://admin-erp.turbodeliveryapp.com/analystics",
+    github: "#",
+    type: "Professionnel",
+  },
+  {
+    title: "Turbo Finance",
+    description:
+      "Application de gestion financière et comptabilité. Solution complète pour la gestion des finances, des comptes et des transactions.",
+    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "API REST", "MongoDB", "Express.js"],
+    image: "/assets/image/téléchargement (3).jpg",
+    link: "https://admin-erp.turbodeliveryapp.com/analystics",
+    github: "#",
+    type: "Professionnel",
+  },
+  {
+    title: "Chicken-Nation",
+    description:
+      "Site officiel du fast food et l'application de gestion web de commandes de Chicken-Nation. Plateforme complète pour la restauration.",
+    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "API REST", "MongoDB", "Express.js"],
+    image: "/assets/image/téléchargement (3).jpg",
+    link: "https://www.chicken-nation.com/fr",
+    github: "#",
+    type: "Professionnel",
+  },
+  {
+    title: "Lunion-Lab-Website",
+    description:
+      "Site officiel de Lunion-Lab. Plateforme corporate présentant l'entreprise, ses services et ses réalisations.",
+    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "API REST", "MongoDB", "Express.js"],
+    image: "/assets/image/téléchargement (3).jpg",
+    link: "https://www.lunion-lab.com/",
+    github: "#",
+    type: "Professionnel",
+  },
+  {
+    title: "Sidi Immobilier",
+    description:
+      "Plateforme immobilière pour Sidi Immobilier. Solution complète pour la gestion des biens immobiliers et des transactions.",
+    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "API REST", "MongoDB", "Express.js"],
+    image: "/assets/image/téléchargement (3).jpg",
+    link: "https://sidi.lunion-lab.com/fr",
+    github: "#",
+    type: "Professionnel",
+  },
+  {
+    title: "Luxury Home Abidjan",
+    description:
+      "Site immobilier pour les logements de luxe à Abidjan. Plateforme élégante pour les biens immobiliers haut de gamme.",
+    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "API REST", "MongoDB", "Express.js"],
+    image: "/assets/image/téléchargement (3).jpg",
+    link: "https://lha.lunion-lab.com/",
+    github: "#",
+    type: "Professionnel",
+  },
+  {
+    title: "Catholikia",
+    description:
+      "Application pour la communauté catholique. Plateforme numérique pour les activités et services de la communauté.",
+    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "API REST", "MongoDB", "Express.js"],
+    image: "/assets/image/téléchargement (3).jpg",
+    link: "https://catholikia.com/fr",
+    github: "#",
+    type: "Professionnel",
+  },
+  {
+    title: "OSA FC",
+    description:
+      "Site officiel du club de football OSA FC. Plateforme sportive présentant le club, les actualités et les événements.",
+    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "API REST", "MongoDB", "Express.js"],
+    image: "/assets/image/téléchargement (3).jpg",
+    link: "https://osa-website-alpha.vercel.app/",
+    github: "#",
+    type: "Professionnel",
+  },
+  {
+    title: "Paroisse St Sauveur",
+    description:
+      "Back-office pour la paroisse Saint Sauveur. Système de gestion administrative pour les activités et services paroissiaux.",
+    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "API REST", "MongoDB", "Express.js", "Back-office"],
+    image: "/assets/image/téléchargement (3).jpg",
+    link: "https://back-office-paroisse-st-sauveur-mis.vercel.app",
+    github: "#",
+    type: "Professionnel",
+  },
 ];
 
 export const Projects = () => {

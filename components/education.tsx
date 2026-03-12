@@ -20,13 +20,13 @@ const education = [
 ];
 
 const certifications = [
-    {
-    title: "Python pour l'Analyse de Données",
-    organization: "GOMYCODE",
-    period: "Août 2022 - Décembre 2022",
+  {
+    title: "Développement Full-Stack avec Next.js front-end et  Nest.js back-end",
+    organization: "LUNION-LAB",
+    period: "Février 2025 - Juillet 2025",
     description:
-      "Formation de 3 mois sur les bases de Python pour l'analyse de données et la programmation.",
-    technologies: ["Python", "Data Analysis", "Pandas","Numpy","Matplotlib","Pandas"],
+      "Maîtrise du framework Nest.js pour la création d'APIs robustes et scalables avec Nest.js et Next.js pour le front-end.",
+    technologies: ["Nest.js", "Next.js", "TypeScript","Node.js","PostgreSQL","React.js","JavaScript"],
   },
   {
     title: "Full-Stack Bootcamp JavaScript",
@@ -36,14 +36,13 @@ const certifications = [
       "Formation intensive de 9 mois sur le stack MERN (MongoDB, Express.js, React.js, Node.js). Apprentissage du développement Full-Stack moderne avec JavaScript.",
     technologies: ["MongoDB", "Express.js", "React.js", "Node.js", "JavaScript"],
   },
-
   {
-    title: "Développement Full-Stack avec Next.js front-end et  Nest.js back-end",
-    organization: "LUNION-LAB",
-    period: "Formation complémentaire",
+    title: "Python pour l'Analyse de Données",
+    organization: "GOMYCODE",
+    period: "Août 2022 - Décembre 2022",
     description:
-      "Maîtrise du framework Nest.js pour la création d'APIs robustes et scalables avec Nest.js et Next.js pour le front-end.",
-    technologies: ["Nest.js", "Next.js", "TypeScript","Node.js","PostgreSQL","React.js","JavaScript"],
+      "Formation de 3 mois sur les bases de Python pour l'analyse de données et la programmation.",
+    technologies: ["Python", "Data Analysis", "Pandas","Numpy","Matplotlib","Pandas"],
   },
 ];
 
