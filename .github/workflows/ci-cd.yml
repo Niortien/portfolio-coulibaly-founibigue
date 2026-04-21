@@ -49,72 +49,9 @@ jobs:
         run: pnpm build
 
   # ─────────────────────────────────────────
-  # JOB 2 : Deploy Preview (PR uniquement)
+  # JOB 2 : Deploy (géré par Vercel nativement)
   # ─────────────────────────────────────────
-  deploy-preview:
-    name: Deploy Preview
-    runs-on: ubuntu-latest
-    needs: quality
-    if: github.event_name == 'pull_request'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: ${{ env.PNPM_VERSION }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Deploy Preview to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./
-
-  # ─────────────────────────────────────────
-  # JOB 3 : Deploy Production (push main)
-  # ─────────────────────────────────────────
-  deploy-production:
-    name: Deploy Production
-    runs-on: ubuntu-latest
-    needs: quality
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: ${{ env.PNPM_VERSION }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Deploy Production to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: "--prod"
-          working-directory: ./
+  # Vercel déploie automatiquement via son intégration GitHub :
+  #   • Push sur main  → déploiement Production
+  #   • Pull Request   → déploiement Preview
+  # Aucune configuration supplémentaire requise.
