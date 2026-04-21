@@ -21,14 +21,11 @@ const themeLabels = {
 }
 
 export const ThemeToggle = () => {
-  const [theme, setTheme] = useState<Theme>("dark")
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "dark"
+    return (localStorage.getItem("theme") as Theme) || "dark"
+  })
   const [open, setOpen] = useState(false)
-
-  useEffect(() => {
-    const saved = (localStorage.getItem("theme") as Theme) || "dark"
-    applyTheme(saved)
-    setTheme(saved)
-  }, [])
 
   const applyTheme = (t: Theme) => {
     document.documentElement.classList.remove("dark", "matrix", "light")
@@ -36,9 +33,12 @@ export const ThemeToggle = () => {
     localStorage.setItem("theme", t)
   }
 
+  useEffect(() => {
+    applyTheme(theme)
+  }, [theme])
+
   const selectTheme = (t: Theme) => {
     setTheme(t)
-    applyTheme(t)
     setOpen(false)
   }
 

@@ -6,7 +6,6 @@ import { Navigation } from "@/components/navigation";
 import { Projects } from "@/components/projects";
 import { Skills } from "@/components/skills";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Contact2 } from "lucide-react";
 
 export default function Home() {
   return (
