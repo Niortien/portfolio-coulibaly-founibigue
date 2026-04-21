@@ -21,6 +21,15 @@ const education = [
 
 const certifications = [
   {
+    title: "Certification Java - Programmation Orientée Objet",
+    organization: "Formation en cours",
+    period: "2026 - Présent",
+    description:
+      "Formation en cours sur Java et la programmation orientée objet. Apprentissage des concepts fondamentaux du langage Java, des design patterns, de la gestion de la mémoire (JVM) et des bonnes pratiques de développement logiciel.",
+    technologies: ["Java", "POO", "JVM", "Design Patterns", "Collections"],
+    status: "En cours",
+  },
+  {
     title: "Développement Full-Stack avec Next.js front-end et  Nest.js back-end",
     organization: "LUNION-LAB",
     period: "Février 2025 - Juillet 2025",
@@ -119,7 +128,14 @@ export const Education = () => {
                     <CardHeader>
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                         <div className="flex-1 font-lora">
-                          <CardTitle className="text-lg lg:text-xl mb-2 font-bold ">{cert.title}</CardTitle>
+                          <div className="flex items-start justify-between gap-2 mb-2">
+                            <CardTitle className="text-lg lg:text-xl font-bold">{cert.title}</CardTitle>
+                            {cert.status && (
+                              <Badge variant="outline" className="shrink-0 text-xs border-amber-500/50 text-amber-600 bg-amber-500/10 whitespace-nowrap">
+                                🎓 {cert.status}
+                              </Badge>
+                            )}
+                          </div>
                           <CardDescription className="text-base font-semibold text-foreground">
                             {cert.organization}
                           </CardDescription>

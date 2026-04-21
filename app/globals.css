@@ -45,78 +45,125 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-:root {
+:root,
+.dark {
   --radius: 0.625rem;
-  --background: #0F172A;
-  --foreground: #E2E8F0;
-  --card: #1E293B;
-  --card-foreground: #E2E8F0;
-  --popover: #1E293B;
-  --popover-foreground: #E2E8F0;
-  --primary: #06B6D4;
-  --primary-foreground: #0F172A;
-  --secondary: #10B981;
-  --secondary-foreground: #0F172A;
-  --muted: #334155;
-  --muted-foreground: #94A3B8;
-  --accent: #8B5CF6;
-  --accent-foreground: #0F172A;
-  --destructive: #F43F5E;
-  --border: #334155;
-  --input: #334155;
-  --ring: #06B6D4;
-  --chart-1: #06B6D4;
-  --chart-2: #8B5CF6;
-  --chart-3: #10B981;
-  --chart-4: #F59E0B;
-  --chart-5: #F43F5E;
-  --sidebar: #0F172A;
-  --sidebar-foreground: #E2E8F0;
-  --sidebar-primary: #06B6D4;
-  --sidebar-primary-foreground: #0F172A;
-  --sidebar-accent: #1E293B;
-  --sidebar-accent-foreground: #E2E8F0;
-  --sidebar-border: #334155;
-  --sidebar-ring: #06B6D4;
+  --background: #030A06;
+  --foreground: #D4F5D4;
+  --card: #081510;
+  --card-foreground: #D4F5D4;
+  --popover: #081510;
+  --popover-foreground: #D4F5D4;
+  --primary: #22C55E;
+  --primary-foreground: #030A06;
+  --secondary: #84CC16;
+  --secondary-foreground: #030A06;
+  --muted: #112218;
+  --muted-foreground: #7BA688;
+  --accent: #4ADE80;
+  --accent-foreground: #030A06;
+  --destructive: #EF4444;
+  --border: #112218;
+  --input: #112218;
+  --ring: #22C55E;
+  --chart-1: #22C55E;
+  --chart-2: #4ADE80;
+  --chart-3: #84CC16;
+  --chart-4: #86EFAC;
+  --chart-5: #16A34A;
+  --sidebar: #030A06;
+  --sidebar-foreground: #D4F5D4;
+  --sidebar-primary: #22C55E;
+  --sidebar-primary-foreground: #030A06;
+  --sidebar-accent: #081510;
+  --sidebar-accent-foreground: #D4F5D4;
+  --sidebar-border: #112218;
+  --sidebar-ring: #22C55E;
 }
 
-.dark {
-  --background: #020617;
-  --foreground: #F1F5F9;
-  --card: #0F172A;
-  --card-foreground: #F1F5F9;
-  --popover: #0F172A;
-  --popover-foreground: #F1F5F9;
-  --primary: #0891B2;
-  --primary-foreground: #020617;
-  --secondary: #059669;
-  --secondary-foreground: #020617;
-  --muted: #1E293B;
-  --muted-foreground: #CBD5E1;
-  --accent: #7C3AED;
-  --accent-foreground: #020617;
-  --destructive: #E11D48;
-  --border: #1E293B;
-  --input: #1E293B;
-  --ring: #0891B2;
-  --chart-1: #0891B2;
-  --chart-2: #7C3AED;
-  --chart-3: #059669;
-  --chart-4: #D97706;
-  --chart-5: #E11D48;
-  --sidebar: #020617;
-  --sidebar-foreground: #F1F5F9;
-  --sidebar-primary: #0891B2;
-  --sidebar-primary-foreground: #020617;
-  --sidebar-accent: #0F172A;
-  --sidebar-accent-foreground: #F1F5F9;
-  --sidebar-border: #1E293B;
-  --sidebar-ring: #0891B2;
+.matrix {
+  --background: #010803;
+  --foreground: #E0FAE0;
+  --card: #030A06;
+  --card-foreground: #E0FAE0;
+  --popover: #030A06;
+  --popover-foreground: #E0FAE0;
+  --primary: #4ADE80;
+  --primary-foreground: #010803;
+  --secondary: #A3E635;
+  --secondary-foreground: #010803;
+  --muted: #081510;
+  --muted-foreground: #86EFAC;
+  --accent: #86EFAC;
+  --accent-foreground: #010803;
+  --destructive: #EF4444;
+  --border: #081510;
+  --input: #081510;
+  --ring: #4ADE80;
+  --chart-1: #4ADE80;
+  --chart-2: #86EFAC;
+  --chart-3: #A3E635;
+  --chart-4: #22C55E;
+  --chart-5: #16A34A;
+  --sidebar: #010803;
+  --sidebar-foreground: #E0FAE0;
+  --sidebar-primary: #4ADE80;
+  --sidebar-primary-foreground: #010803;
+  --sidebar-accent: #030A06;
+  --sidebar-accent-foreground: #E0FAE0;
+  --sidebar-border: #081510;
+  --sidebar-ring: #4ADE80;
+}
+
+.light {
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --card: #F8FAFC;
+  --card-foreground: #0F172A;
+  --popover: #F8FAFC;
+  --popover-foreground: #0F172A;
+  --primary: #16A34A;
+  --primary-foreground: #FFFFFF;
+  --secondary: #15803D;
+  --secondary-foreground: #FFFFFF;
+  --muted: #F1F5F9;
+  --muted-foreground: #64748B;
+  --accent: #22C55E;
+  --accent-foreground: #FFFFFF;
+  --destructive: #DC2626;
+  --border: #E2E8F0;
+  --input: #E2E8F0;
+  --ring: #16A34A;
+  --chart-1: #16A34A;
+  --chart-2: #22C55E;
+  --chart-3: #15803D;
+  --chart-4: #4ADE80;
+  --chart-5: #84CC16;
+  --sidebar: #F8FAFC;
+  --sidebar-foreground: #0F172A;
+  --sidebar-primary: #16A34A;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F1F5F9;
+  --sidebar-accent-foreground: #0F172A;
+  --sidebar-border: #E2E8F0;
+  --sidebar-ring: #16A34A;
+}
+
+/* Light theme: add visible borders since backgrounds are already light */
+.light .glass {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.light .glass-card {
+  border: 1px solid rgba(0, 0, 0, 0.07);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  
+  html {
+    scroll-behavior: smooth;
   }
   
   p {
@@ -129,6 +176,20 @@
   
   body {
     @apply bg-background text-foreground;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
   }
 }
 
@@ -146,58 +207,87 @@
   }
 
   .gradient-text {
-    color: #F1F5F9;
-    text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-gold {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .gradient-bg {
-    background: linear-gradient(135deg, #06B6D4 0%, #8B5CF6 50%, #10B981 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--secondary) 100%);
   }
 
   .neural-gradient {
-    background: linear-gradient(135deg, #06B6D4 0%, #0891B2 20%, #8B5CF6 40%, #10B981 60%, #F59E0B 80%, #F43F5E 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--ring) 40%, var(--accent) 70%, var(--secondary) 100%);
   }
 
   .cyber-gradient {
-    background: linear-gradient(135deg, #0F172A 0%, #06B6D4 25%, #8B5CF6 50%, #10B981 75%, #0F172A 100%);
+    background: linear-gradient(135deg, var(--background) 0%, var(--primary) 25%, var(--accent) 50%, var(--secondary) 75%, var(--background) 100%);
   }
 
   .matrix-gradient {
-    background: linear-gradient(135deg, #06B6D4 0%, #10B981 30%, #06B6D4 60%, #8B5CF6 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 30%, var(--ring) 60%, var(--secondary) 100%);
   }
 
   .glow-effect {
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 40%, transparent);
   }
 
   .neural-glow {
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 0 30px color-mix(in srgb, var(--accent) 30%, transparent);
   }
 
   .neural-border {
     border: 1px solid transparent;
     background: linear-gradient(var(--card), var(--card)) padding-box,
-                linear-gradient(135deg, #06B6D4, #8B5CF6, #10B981) border-box;
+                linear-gradient(135deg, var(--primary), var(--accent), var(--secondary)) border-box;
   }
 
   .hover-glow:hover {
-    box-shadow: 0 0 40px rgba(6, 182, 212, 0.6);
+    box-shadow: 0 0 40px color-mix(in srgb, var(--primary) 60%, transparent);
     transform: translateY(-2px);
     transition: all 0.3s ease;
   }
 
   .neural-grid {
     background-image: 
-      linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
-    background-size: 40px 40px;
+      linear-gradient(color-mix(in srgb, var(--primary) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--accent) 7%, transparent) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .glass {
+    background: color-mix(in srgb, var(--background) 65%, transparent);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid color-mix(in srgb, var(--primary) 10%, transparent);
+  }
+
+  .glass-card {
+    background: color-mix(in srgb, var(--card) 55%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid color-mix(in srgb, var(--primary) 7%, transparent);
+  }
+
+  .section-divider {
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--primary) 50%, transparent), color-mix(in srgb, var(--accent) 50%, transparent), transparent);
+    height: 1px;
+    width: 100%;
   }
 
   .circuit-pattern {
     background-image: 
-      radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+      radial-gradient(circle at 20% 50%, color-mix(in srgb, var(--primary) 10%, transparent) 0%, transparent 50%),
+      radial-gradient(circle at 80% 50%, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 50%),
+      radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--secondary) 10%, transparent) 0%, transparent 50%);
     background-size: 60px 60px;
   }
 
@@ -207,16 +297,16 @@
 
   @keyframes glitch {
     0%, 100% {
-      text-shadow: 2px 0 #06B6D4, -2px 0 #8B5CF6;
+      text-shadow: 2px 0 var(--primary), -2px 0 var(--accent);
     }
     25% {
-      text-shadow: -2px 0 #10B981, 2px 0 #F59E0B;
+      text-shadow: -2px 0 var(--secondary), 2px 0 var(--ring);
     }
     50% {
-      text-shadow: 2px 0 #F43F5E, -2px 0 #06B6D4;
+      text-shadow: 2px 0 var(--accent), -2px 0 var(--primary);
     }
     75% {
-      text-shadow: -2px 0 #8B5CF6, 2px 0 #10B981;
+      text-shadow: -2px 0 var(--ring), 2px 0 var(--secondary);
     }
   }
 
@@ -226,10 +316,10 @@
 
   @keyframes neuralPulse {
     0%, 100% {
-      box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+      box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 40%, transparent);
     }
     50% {
-      box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
+      box-shadow: 0 0 40px color-mix(in srgb, var(--accent) 60%, transparent);
     }
   }
 

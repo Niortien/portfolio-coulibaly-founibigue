@@ -1,11 +1,28 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+"use client";
+
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import { Code2, Database, Layers, Smartphone } from "lucide-react";
+
+const levelToPercent: Record<string, number> = {
+  Expert: 95,
+  Avancé: 80,
+  Intermédiaire: 55,
+  "En cours": 25,
+};
+
+const levelColor: Record<string, string> = {
+  Expert: "#22C55E",
+  Avancé: "#4ADE80",
+  Intermédiaire: "#84CC16",
+  "En cours": "#86EFAC",
+};
 
 const skillCategories = [
   {
     title: "Frontend",
     icon: Code2,
+    color: "#22C55E",
     skills: [
       { name: "React.js", level: "Avancé" },
       { name: "Next.js", level: "Avancé" },
@@ -18,10 +35,12 @@ const skillCategories = [
   {
     title: "Backend",
     icon: Layers,
+    color: "#4ADE80",
     skills: [
       { name: "Node.js", level: "Avancé" },
       { name: "Express.js", level: "Avancé" },
       { name: "Nest.js", level: "Intermédiaire" },
+      { name: "Java", level: "En cours" },
       { name: "Python", level: "Intermédiaire" },
       { name: "WinDev", level: "Intermédiaire" },
     ],
@@ -29,6 +48,7 @@ const skillCategories = [
   {
     title: "Base de données",
     icon: Database,
+    color: "#84CC16",
     skills: [
       { name: "MongoDB", level: "Avancé" },
       { name: "SQL", level: "Avancé" },
@@ -38,6 +58,7 @@ const skillCategories = [
   {
     title: "Mobile & Autres",
     icon: Smartphone,
+    color: "#86EFAC",
     skills: [
       { name: "Flutter", level: "Intermédiaire" },
       { name: "Dart", level: "Intermédiaire" },
@@ -49,67 +70,90 @@ const skillCategories = [
 
 const getLevelColor = (level: string) => {
   switch (level) {
-    case "Expert":
-      return "bg-green-500/10 text-green-600 border-green-500/20";
-    case "Avancé":
-      return "bg-blue-500/10 text-blue-600 border-blue-500/20";
-    case "Intermédiaire":
-      return "bg-orange-500/10 text-orange-600 border-orange-500/20";
-    default:
-      return "bg-gray-500/10 text-gray-600 border-gray-500/20";
+    case "Expert": return "text-primary font-bold border-primary/40 bg-primary/15";
+    case "Avancé": return "text-accent border-accent/30 bg-accent/10";
+    case "Intermédiaire": return "text-muted-foreground border-border bg-muted/50";
+    case "En cours": return "text-secondary border-secondary/30 bg-secondary/10";
+    default: return "text-muted-foreground bg-muted border-border";
   }
 };
 
-export const Skills = () => {
+const SkillBar = ({ name, level, color }: { name: string; level: string; color: string }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const pct = levelToPercent[level] ?? 40;
+  const barColor = levelColor[level] ?? color;
+
   return (
-    <section id="skills" className="py-16 lg:py-24 px-4 bg-muted/30">
-      <div className="container mx-auto">
+    <div ref={ref} className="mb-4">
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-sm font-medium text-foreground/90 font-body">{name}</span>
+        <span className={`text-xs px-2 py-0.5 rounded-full border font-body ${getLevelColor(level)}`}>{level}</span>
+      </div>
+      <div className="h-1.5 w-full rounded-full bg-muted/60 overflow-hidden">
+        <motion.div
+          className="h-full rounded-full"
+          style={{ background: `linear-gradient(90deg, ${barColor}99, ${barColor})` }}
+          initial={{ width: 0 }}
+          animate={{ width: inView ? `${pct}%` : 0 }}
+          transition={{ duration: 1, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+        />
+      </div>
+    </div>
+  );
+};
+
+export const Skills = () => {
+  const titleRef = useRef(null);
+  const titleInView = useInView(titleRef, { once: true, margin: "-80px" });
+
+  return (
+    <section id="skills" className="py-16 lg:py-24 px-4 bg-muted/20 relative overflow-hidden">
+      <div className="absolute inset-0 neural-grid opacity-30 pointer-events-none" />
+      <div className="container mx-auto relative z-10">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6">
+          <motion.div
+            ref={titleRef}
+            className="text-center mb-12 lg:mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={titleInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6 font-heading">
               Compétences <span className="gradient-text">Techniques</span>
             </h2>
-            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto">
+            <div className="section-divider mx-auto mb-6" />
+            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto font-body">
               Technologies et outils que je maîtrise pour créer des applications modernes
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 font-lora">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {skillCategories.map((category, index) => {
               const Icon = category.icon;
               return (
-                <Card
+                <motion.div
                   key={index}
-                  className="hover:shadow-lg transition-all duration-300 animate-slide-up"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className="glass-card rounded-2xl p-6 lg:p-7"
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -4 }}
                 >
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-3 text-xl lg:text-2xl">
-                      <div className="p-2 lg:p-3 rounded-lg bg-primary/10">
-                        <Icon className="w-5 h-5 lg:w-6 lg:h-6 text-primary" />
-                      </div>
-                      {category.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2 lg:gap-3">
-                      {category.skills.map((skill, idx) => (
-                        <div
-                          key={idx}
-                          className="flex flex-col items-start gap-1 p-3 rounded-lg bg-background hover:bg-muted transition-colors"
-                        >
-                          <span className="font-medium text-sm lg:text-base">{skill.name}</span>
-                          <Badge
-                            variant="outline"
-                            className={`text-xs ${getLevelColor(skill.level)}`}
-                          >
-                            {skill.level}
-                          </Badge>
-                        </div>
-                      ))}
+                  <div className="flex items-center gap-3 mb-6">
+                    <div
+                      className="p-2.5 rounded-xl"
+                      style={{ background: `${category.color}18`, border: `1px solid ${category.color}30` }}
+                    >
+                      <Icon className="w-5 h-5" style={{ color: category.color }} />
                     </div>
-                  </CardContent>
-                </Card>
+                    <h3 className="text-lg font-bold font-heading text-foreground/90">{category.title}</h3>
+                  </div>
+                  {category.skills.map((skill, idx) => (
+                    <SkillBar key={idx} name={skill.name} level={skill.level} color={category.color} />
+                  ))}
+                </motion.div>
               );
             })}
           </div>
