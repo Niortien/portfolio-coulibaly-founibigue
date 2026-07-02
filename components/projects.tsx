@@ -4,11 +4,12 @@ import { motion, useInView, type Variants } from "framer-motion";
 import { useRef } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, CheckCircle2, TrendingUp } from "lucide-react";
+import { Github, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 
 const projects = [
   {
+    code: "ERP",
     title: "Turbo ERP",
     description: "Système de gestion intégré (ERP) pour les entreprises. Centralise les opérations, ressources humaines et processus métiers en une seule plateforme.",
     tasks: [
@@ -22,9 +23,10 @@ const projects = [
     link: "https://admin-erp.turbodeliveryapp.com/analystics",
     github: "#",
     type: "Professionnel",
-    accent: "#06B6D4",
+    accent: "#24365E",
   },
   {
+    code: "FINANCE",
     title: "Turbo Finance",
     description: "Application de gestion financière et comptabilité d'entreprise. Module financier intégré avec suivi des transactions et rapports comptables.",
     tasks: [
@@ -38,9 +40,10 @@ const projects = [
     link: "https://admin-erp.turbodeliveryapp.com/analystics",
     github: "#",
     type: "Professionnel",
-    accent: "#10B981",
+    accent: "#1F6E5C",
   },
   {
+    code: "RESTAURATION",
     title: "Chicken-Nation",
     description: "Site officiel et application web de gestion de commandes pour la chaîne de restauration rapide Chicken-Nation.",
     tasks: [
@@ -54,9 +57,10 @@ const projects = [
     link: "https://www.chicken-nation.com/fr",
     github: "#",
     type: "Professionnel",
-    accent: "#F97316",
+    accent: "#B54B1F",
   },
   {
+    code: "IMMOBILIER",
     title: "Sidi Immobilier",
     description: "Plateforme immobilière complète pour Sidi Immobilier. Solution numérique de gestion et de présentation des biens immobiliers.",
     tasks: [
@@ -70,9 +74,10 @@ const projects = [
     link: "https://sidi.lunion-lab.com/fr",
     github: "#",
     type: "Professionnel",
-    accent: "#6366F1",
+    accent: "#5B4636",
   },
   {
+    code: "IMMOBILIER",
     title: "Luxury Home Abidjan",
     description: "Site immobilier haut de gamme pour les logements de luxe à Abidjan. Plateforme élégante dédiée aux biens immobiliers premium.",
     tasks: [
@@ -86,9 +91,10 @@ const projects = [
     link: "https://lha.lunion-lab.com/",
     github: "#",
     type: "Professionnel",
-    accent: "#F59E0B",
+    accent: "#8A6D3B",
   },
   {
+    code: "VITRINE",
     title: "Lunion-Lab Website",
     description: "Site officiel corporate de Lunion-Lab, présentant l'entreprise, ses services et l'ensemble de ses réalisations.",
     tasks: [
@@ -102,9 +108,10 @@ const projects = [
     link: "https://www.lunion-lab.com/",
     github: "#",
     type: "Professionnel",
-    accent: "#8B5CF6",
+    accent: "#3D4F7D",
   },
   {
+    code: "ASSOCIATIF",
     title: "Catholikia",
     description: "Application numérique complète pour la communauté catholique. Plateforme centralisant les activités, services et événements paroissiaux.",
     tasks: [
@@ -118,9 +125,10 @@ const projects = [
     link: "https://catholikia.com/fr",
     github: "#",
     type: "Professionnel",
-    accent: "#0EA5E9",
+    accent: "#2C5F7C",
   },
   {
+    code: "SPORT",
     title: "OSA FC",
     description: "Site officiel du club de football OSA FC. Plateforme sportive moderne présentant le club, les matchs et les actualités.",
     tasks: [
@@ -134,9 +142,10 @@ const projects = [
     link: "https://osa-website-alpha.vercel.app/",
     github: "#",
     type: "Professionnel",
-    accent: "#22C55E",
+    accent: "#2F6B3A",
   },
   {
+    code: "ASSOCIATIF",
     title: "Paroisse St Sauveur",
     description: "Back-office de gestion administrative pour la paroisse Saint Sauveur. Système complet de gestion des activités et services paroissiaux.",
     tasks: [
@@ -150,9 +159,27 @@ const projects = [
     link: "https://back-office-paroisse-st-sauveur-mis.vercel.app",
     github: "#",
     type: "Professionnel",
-    accent: "#64748B",
+    accent: "#64645C",
   },
   {
+    code: "COMMERCE",
+    title: "Dri Valé — Gestion Boutique",
+    description: "Système complet de gestion pour une boutique de vêtements à Yopougon, Abidjan : caisse, stock, entrées/sorties et vitrine en ligne unifiés.",
+    tasks: [
+      "Backend Nest.js (CQRS, Prisma, PostgreSQL) : produits, variantes, stock, caisse, entrées/sorties, boutiques et rapports",
+      "Frontend Next.js avec espace vitrine (catalogue, lookbook, marque) et back-office multi-boutiques (caisse, stock, promotions, activité)",
+      "Intégration Cloudinary pour la gestion des médias produits et génération de rapports",
+    ],
+    impact: "Caisse, stock en temps réel et vitrine en ligne réunis sur une seule plateforme pour la boutique",
+    technologies: ["Nest.js", "Next.js", "Prisma", "PostgreSQL", "CQRS", "TypeScript"],
+    image: "/assets/image/drivale_logo.jpeg",
+    link: "https://dri-vale.org",
+    github: "#",
+    type: "Personnel",
+    accent: "#8A5A34",
+  },
+  {
+    code: "STOCK",
     title: "Stock-Pro",
     description: "Application de gestion de stock moderne et intuitive. Solution complète pour le suivi des inventaires et la gestion des produits.",
     tasks: [
@@ -166,25 +193,27 @@ const projects = [
     link: "https://stock-pro-six.vercel.app/stock",
     github: "#",
     type: "Personnel",
-    accent: "#14B8A6",
+    accent: "#3E7A6D",
   },
   {
+    code: "ÉDUCATION",
     title: "Biblio UPB — Plateforme Universitaire",
     description: "Plateforme numérique complète pour l'Université Polytechnique de Bingerville. Système multi-rôles (Admin, Étudiant, Professeur) couvrant la gestion documentaire, la scolarité, les notes et le transport.",
     tasks: [
-      "Développement du backend Nest.js avec 10 modules métiers : documents (cours/TD/TP/examens), filières, niveaux, matières, scolarité, transport, notes, professeurs, utilisateurs et authentification JWT",
-      "Création des 3 espaces dédiés côté Next.js : dashboard Admin, espace Étudiant (inscription, scolarité, notes, documents) et espace Professeur",
-      "Mise en place d'un système de gestion documentaire permettant aux étudiants de consulter les cours classés par filière, niveau et matière",
+      "Backend Nest.js avec 10 modules métiers : documents, filières, niveaux, matières, scolarité, transport, notes, professeurs, utilisateurs et authentification JWT",
+      "3 espaces dédiés côté Next.js : dashboard Admin, espace Étudiant et espace Professeur",
+      "Système de gestion documentaire classé par filière, niveau et matière",
     ],
-    impact: "Centralisation de la vie universitaire sur une seule plateforme, réduisant la charge administrative et améliorant l'accès aux ressources pédagogiques",
+    impact: "Centralisation de la vie universitaire, réduisant la charge administrative et améliorant l'accès aux ressources pédagogiques",
     technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "JWT", "TypeScript", "Prisma"],
     image: "/assets/image/upb.jpg",
     link: "https://univeriste-polytechnique-de-bingerville.vercel.app/",
     github: "#",
     type: "Personnel",
-    accent: "#3B82F6",
+    accent: "#2E4A7D",
   },
   {
+    code: "TRANSPORT",
     title: "Application SOTRA",
     description: "Système de gestion interne pour la SOTRA (Société de Transport Abidjanais). Conçu selon la méthode MERISE avec WinDev et SQL.",
     tasks: [
@@ -193,14 +222,15 @@ const projects = [
       "Développement de l'application de gestion métier avec WinDev",
     ],
     impact: "Digitalisation et optimisation des processus de gestion interne de la SOTRA",
-    technologies: ["WinDev", "SQL", "MERISE", "Base de données"],
+    technologies: ["WinDev", "SQL", "MERISE"],
     image: "/assets/image/Logo_sotra_2009.png",
     link: "#",
     github: "#",
     type: "Professionnel",
-    accent: "#94A3B8",
+    accent: "#5C6169",
   },
   {
+    code: "FORMATION",
     title: "Projets MERN Stack",
     description: "Ensemble d'applications full-stack développées avec le stack MERN. APIs RESTful et interfaces utilisateur dynamiques.",
     tasks: [
@@ -214,10 +244,11 @@ const projects = [
     link: "#",
     github: "#",
     type: "Personnel",
-    accent: "#84CC16",
+    accent: "#4B6B2C",
   },
   {
-    title: "LUXTIME - E-commerce",
+    code: "E-COMMERCE",
+    title: "LUXTIME",
     description: "Application web e-commerce complète avec gestion de produits, panier d'achat et système de paiement intégré.",
     tasks: [
       "Conception et développement de l'interface produits et du panier d'achat",
@@ -230,40 +261,40 @@ const projects = [
     link: "#",
     github: "#",
     type: "Professionnel",
-    accent: "#EC4899",
+    accent: "#8C3B5E",
   },
   {
+    code: "FLOTTE",
     title: "Maintenance Pro — SATE",
     description: "Système complet de gestion de maintenance de flotte de véhicules pour SATE. Application full-stack avec rôles admin et responsable de site, couvrant véhicules, techniciens, interventions et rapports.",
     tasks: [
-      "Conception et développement du backend Nest.js avec Prisma ORM et PostgreSQL : modules véhicules, techniciens (6 spécialités), interventions, sites et rapports",
-      "Développement du frontend Next.js multi-rôles (Admin, Responsable de site) avec dashboards de suivi en temps réel",
-      "Implémentation du suivi complet des interventions : types de pannes (Mécanique, Électricité, Hydraulique…), priorités (Faible → Urgente), statuts et temps d'intervention",
+      "Backend Nest.js avec Prisma ORM et PostgreSQL : véhicules, techniciens (6 spécialités), interventions, sites et rapports",
+      "Frontend Next.js multi-rôles (Admin, Responsable de site) avec dashboards de suivi en temps réel",
+      "Suivi complet des interventions : types de pannes, priorités, statuts et temps d'intervention",
     ],
-    impact: "Digitalisation complète de la gestion de flotte : réduction des pannes non traitées, traçabilité totale des interventions et optimisation de la disponibilité des véhicules",
+    impact: "Réduction des pannes non traitées, traçabilité totale des interventions et optimisation de la disponibilité des véhicules",
     technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "Prisma", "JWT", "TypeScript"],
     image: "/assets/image/mainteance.png",
     link: "#",
     github: "#",
     type: "Professionnel",
-    accent: "#10B981",
+    accent: "#1F6E5C",
   },
 ];
 
 const containerVariants: Variants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.08 },
+    transition: { staggerChildren: 0.06 },
   },
 };
 
 const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 50, scale: 0.97 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.45, ease: "easeOut" },
   },
 };
 
@@ -272,21 +303,22 @@ export const Projects = () => {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="projects" className="py-16 lg:py-24 px-4">
+    <section id="projects" className="py-20 lg:py-28 px-4">
       <div className="container mx-auto">
         <div className="max-w-7xl mx-auto">
           <motion.div
-            className="text-center mb-12 lg:mb-16"
-            initial={{ opacity: 0, y: 30 }}
+            className="mb-14 lg:mb-16 max-w-2xl"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6">
-              Mes <span className="gradient-text">Projets</span>
+            <span className="eyebrow">03 — Dossier de projets</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold mt-3 mb-4">
+              Systèmes livrés en production
             </h2>
-            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Une sélection de projets professionnels et personnels livrés en production
+            <p className="text-base lg:text-lg text-muted-foreground">
+              {projects.length} projets — plateformes de gestion, back-offices et sites livrés pour des entreprises, commerces et institutions.
             </p>
           </motion.div>
 
@@ -295,145 +327,89 @@ export const Projects = () => {
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6"
           >
             {projects.map((project, index) => (
               <motion.div
                 key={index}
                 variants={cardVariants}
-                whileHover={{ y: -8, transition: { duration: 0.25, ease: "easeOut" } }}
-                className="group relative flex flex-col rounded-2xl overflow-hidden border border-border/50 bg-card shadow-md hover:shadow-2xl transition-shadow duration-300"
-                style={{
-                  boxShadow: `0 0 0 0 ${project.accent}00`,
-                }}
-                whileFocus={{ outline: "none" }}
+                className="dossier-card flex flex-col"
+                style={{ borderTopWidth: "3px", borderTopColor: project.accent }}
               >
-                {/* Glow border on hover */}
-                <motion.div
-                  className="absolute inset-0 rounded-2xl pointer-events-none z-10"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{
-                    boxShadow: `inset 0 0 0 1.5px ${project.accent}60`,
-                  }}
-                />
-
-                {/* Image header */}
-                <div
-                  className="relative h-44 flex items-center justify-center overflow-hidden"
-                  style={{ background: `linear-gradient(135deg, ${project.accent}40 0%, ${project.accent}15 50%, ${project.accent}05 100%)` }}
-                >
-                  {/* Decorative circles */}
-                  <div className="absolute -top-6 -right-6 w-28 h-28 rounded-full opacity-20" style={{ background: project.accent }} />
-                  <div className="absolute -bottom-4 -left-4 w-20 h-20 rounded-full opacity-10" style={{ background: project.accent }} />
-
-                  {/* White image frame */}
-                  <motion.div
-                    className="relative z-10 w-28 h-28 rounded-xl bg-card border border-border/50 flex items-center justify-center shadow-lg overflow-hidden"
-                    whileHover={{ scale: 1.08, rotate: 2 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                {/* Header */}
+                <div className="flex items-start gap-3 p-4 border-b border-border">
+                  <div className="w-11 h-11 shrink-0 border border-border bg-muted flex items-center justify-center overflow-hidden">
                     <Image
                       src={project.image}
                       alt={project.title}
-                      width={112}
-                      height={112}
-                      className="w-20 h-20 object-contain"
+                      width={44}
+                      height={44}
+                      className="w-8 h-8 object-contain"
                     />
-                  </motion.div>
-
-                  {/* Type badge */}
-                  <div className="absolute top-3 right-3 z-20">
-                    <Badge
-                      variant={project.type === "Professionnel" ? "default" : "secondary"}
-                      className="text-xs font-medium shadow"
-                    >
-                      {project.type}
-                    </Badge>
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="eyebrow" style={{ color: project.accent }}>{project.code}</span>
+                      <Badge variant={project.type === "Professionnel" ? "default" : "secondary"}>
+                        {project.type}
+                      </Badge>
+                    </div>
+                    <h3 className="font-display font-semibold text-base leading-snug mt-1">
+                      {project.title}
+                    </h3>
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="flex flex-col flex-1 p-5 gap-4">
-                  {/* Title */}
-                  <div>
-                    <h3 className="font-bold text-base lg:text-lg font-lora group-hover:text-primary transition-colors duration-200 leading-snug mb-1">
-                      {project.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground font-lora leading-relaxed line-clamp-2">
-                      {project.description}
-                    </p>
-                  </div>
+                {/* Body */}
+                <div className="flex flex-col flex-1 p-4 gap-4">
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {project.description}
+                  </p>
 
-                  {/* Tasks */}
                   <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground mb-2">Contributions</p>
+                    <span className="eyebrow block mb-2">Contributions</span>
                     <ul className="space-y-1.5">
                       {project.tasks.map((task, idx) => (
-                        <motion.li
-                          key={idx}
-                          className="flex items-start gap-2 text-xs text-muted-foreground font-lora"
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: idx * 0.08 + index * 0.05 }}
-                        >
-                          <CheckCircle2 className="w-3 h-3 mt-0.5 shrink-0" style={{ color: project.accent }} />
+                        <li key={idx} className="flex items-start gap-2 text-xs text-muted-foreground leading-relaxed">
+                          <span className="font-mono text-[10px] mt-0.5 shrink-0" style={{ color: project.accent }}>→</span>
                           <span>{task}</span>
-                        </motion.li>
+                        </li>
                       ))}
                     </ul>
                   </div>
 
-                  {/* Impact */}
-                  <div
-                    className="flex items-start gap-2 p-2.5 rounded-lg text-xs font-lora"
-                    style={{ background: `${project.accent}12`, border: `1px solid ${project.accent}30` }}
-                  >
-                    <TrendingUp className="w-3.5 h-3.5 shrink-0 mt-0.5" style={{ color: project.accent }} />
-                    <p className="text-muted-foreground leading-relaxed">
-                      <span className="font-semibold" style={{ color: project.accent }}>Impact : </span>
-                      {project.impact}
-                    </p>
+                  <div className="pl-3 border-l-2 text-xs leading-relaxed" style={{ borderColor: project.accent }}>
+                    <span className="font-mono text-[10px] tracking-wide uppercase" style={{ color: project.accent }}>Impact — </span>
+                    <span className="text-muted-foreground">{project.impact}</span>
                   </div>
 
-                  {/* Tech badges */}
                   <div className="flex flex-wrap gap-1.5 mt-auto">
                     {project.technologies.map((tech, idx) => (
-                      <Badge key={idx} variant="outline" className="text-[10px] px-2 py-0.5 font-lora">
+                      <Badge key={idx} variant="outline">
                         {tech}
                       </Badge>
                     ))}
                   </div>
 
-                  {/* Action buttons */}
                   <div className="flex gap-2 pt-1">
-                    {project.link && project.link !== "#" && (
-                      <Button
-                        size="sm"
-                        className="flex-1 text-xs gap-1.5 h-8"
-                        style={{ background: project.accent, color: "#fff" }}
-                        asChild
-                      >
+                    {project.link && project.link !== "#" ? (
+                      <Button size="sm" variant="outline" className="flex-1 gap-1.5" asChild>
                         <a href={project.link} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="w-3 h-3" />
+                          <ArrowUpRight className="w-3.5 h-3.5" />
                           Voir en ligne
                         </a>
                       </Button>
-                    )}
-                    {project.github && project.github !== "#" && (
-                      <Button size="sm" variant="outline" className="flex-1 text-xs gap-1.5 h-8" asChild>
-                        <a href={project.github} target="_blank" rel="noopener noreferrer">
-                          <Github className="w-3 h-3" />
-                          Code
-                        </a>
-                      </Button>
-                    )}
-                    {(!project.link || project.link === "#") && (!project.github || project.github === "#") && (
-                      <div className="flex-1 flex items-center justify-center text-xs text-muted-foreground py-1">
+                    ) : (
+                      <div className="flex-1 flex items-center justify-center text-xs text-muted-foreground py-1.5 border border-dashed border-border">
                         Projet interne
                       </div>
+                    )}
+                    {project.github && project.github !== "#" && (
+                      <Button size="sm" variant="ghost" className="gap-1.5" asChild>
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label="Code source">
+                          <Github className="w-3.5 h-3.5" />
+                        </a>
+                      </Button>
                     )}
                   </div>
                 </div>

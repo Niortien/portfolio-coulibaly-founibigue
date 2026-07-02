@@ -9,15 +9,15 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
   return (
-    <div className="">
+    <div>
       <ThemeToggle />
-      <Navigation/>
+      <Navigation />
       <Hero />
-      <Experience/>
-      <Projects/>
-      <Skills/>
-      <Education/>
-      <Contact/>
+      <Experience />
+      <Projects />
+      <Skills />
+      <Education />
+      <Contact />
     </div>
   );
 }

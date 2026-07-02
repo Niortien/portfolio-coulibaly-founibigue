@@ -1,76 +1,36 @@
 "use client"
 
-import { Moon, Sun, Contrast } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Moon, Sun } from "lucide-react"
 import { useEffect, useState } from "react"
 
-type Theme = "dark" | "matrix" | "light"
-
-const themes: Theme[] = ["dark", "matrix", "light"]
-
-const themeIcons = {
-  dark: <Moon className="h-4 w-4" />,
-  matrix: <Contrast className="h-4 w-4 text-green-400" />,
-  light: <Sun className="h-4 w-4" />,
-}
-
-const themeLabels = {
-  dark: "Sombre",
-  matrix: "Matrix",
-  light: "Blanc",
-}
+type Theme = "dark" | "light"
 
 export const ThemeToggle = () => {
   const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === "undefined") return "dark"
-    return (localStorage.getItem("theme") as Theme) || "dark"
+    if (typeof window === "undefined") return "light"
+    return (localStorage.getItem("theme") as Theme) || "light"
   })
-  const [open, setOpen] = useState(false)
-
-  const applyTheme = (t: Theme) => {
-    document.documentElement.classList.remove("dark", "matrix", "light")
-    document.documentElement.classList.add(t)
-    localStorage.setItem("theme", t)
-  }
 
   useEffect(() => {
-    applyTheme(theme)
+    document.documentElement.classList.remove("dark", "light", "matrix")
+    document.documentElement.classList.add(theme)
   }, [theme])
 
-  const selectTheme = (t: Theme) => {
-    setTheme(t)
-    setOpen(false)
+  const toggle = () => {
+    const next: Theme = theme === "light" ? "dark" : "light"
+    setTheme(next)
+    localStorage.setItem("theme", next)
   }
 
   return (
-    <div className="fixed top-20 right-4 z-50 flex flex-col items-end gap-2">
-      <Button
-        variant="outline"
-        size="icon"
-        onClick={() => setOpen((o) => !o)}
-        className="hover-glow"
-        title={`Thème : ${themeLabels[theme]}`}
-      >
-        {themeIcons[theme]}
-        <span className="sr-only">Changer le thème</span>
-      </Button>
-
-      {open && (
-        <div className="glass rounded-xl overflow-hidden shadow-xl border border-border/40 flex flex-col min-w-[120px]">
-          {themes.map((t) => (
-            <button
-              key={t}
-              onClick={() => selectTheme(t)}
-              className={`flex items-center gap-2.5 px-4 py-2.5 text-sm font-body transition-colors hover:bg-primary/10 ${
-                theme === t ? "text-primary font-semibold" : "text-muted-foreground"
-              }`}
-            >
-              {themeIcons[t]}
-              {themeLabels[t]}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
+    <button
+      onClick={toggle}
+      aria-label="Changer de thème"
+      title={theme === "light" ? "Passer en mode sombre" : "Passer en mode clair"}
+      className="fixed top-5 right-4 lg:top-6 lg:right-8 z-50 flex h-9 w-9 items-center justify-center border border-border bg-card text-foreground hover:border-primary/50 transition-colors cursor-pointer"
+      suppressHydrationWarning
+    >
+      {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+    </button>
   )
 }

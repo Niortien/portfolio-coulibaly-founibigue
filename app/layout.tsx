@@ -1,34 +1,33 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono,Orbitron,Lora } from "next/font/google";
+import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const displayFont = Space_Grotesk({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
 });
 
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
+const bodyFont = IBM_Plex_Sans({
+  variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
-const lora = Lora({
-  variable: "--font-lora",
+const monoFont = IBM_Plex_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
-});
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio - Coulibaly Founibigue Issa Niortien",
-  description: "Développeur web passionné, spécialisé dans la création d'applications modernes et performantes. Découvrez mes projets, compétences et parcours professionnel.",
-  keywords: ["développeur web", "portfolio", "Coulibaly Founibigue Issa Niortien", "web development", "React", "Next.js", "TypeScript"],
+  title: "Coulibaly Founibigue Issa — Développeur Full-Stack",
+  description: "Développeur Full-Stack basé à Abidjan. Conception et livraison de systèmes de gestion, back-offices et plateformes web en production pour entreprises, commerces et institutions.",
+  keywords: ["développeur web", "portfolio", "Coulibaly Founibigue Issa Niortien", "Next.js", "Nest.js", "Abidjan", "Côte d'Ivoire"],
   authors: [{ name: "Coulibaly Founibigue Issa Niortien" }],
   openGraph: {
-    title: "Portfolio - Coulibaly Founibigue Issa Niortien",
-    description: "Développeur web passionné, spécialisé dans la création d'applications modernes et performantes.",
+    title: "Coulibaly Founibigue Issa — Développeur Full-Stack",
+    description: "Conception et livraison de systèmes de gestion, back-offices et plateformes web en production.",
     type: "website",
     locale: "fr_FR",
   },
@@ -40,9 +39,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("theme")||"light";document.documentElement.classList.add(t);}catch(e){}`,
+          }}
+        />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} ${lora.variable}   antialiased`}
+        className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} antialiased`}
       >
         {children}
       </body>

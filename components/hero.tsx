@@ -1,248 +1,152 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Mail, MapPin, Phone, ArrowRight, Code2, Server, Layers, Github } from "lucide-react";
+import { Mail, MapPin, Phone, ArrowRight, Github } from "lucide-react";
 import Image from "next/image";
 
-const stats = [
-  { value: "9+", label: "Projets livrÃ©s" },
-  { value: "2", label: "Stages pro" },
-  { value: "3+", label: "Ans d'expÃ©rience" },
-];
-
-const floatingBadges = [
-  { text: "Next.js ⚡", color: "#4ADE80", delay: 0, pos: "top-0 -right-8 lg:-right-14", anim: { y: [0, -8, 0] } },
-  { text: "Nest.js 🔥", color: "#86EFAC", delay: 0.5, pos: "-bottom-4 -left-8 lg:-left-14", anim: { y: [0, 8, 0] } },
-  { text: "PostgreSQL", color: "#84CC16", delay: 1, pos: "top-1/2 -right-2 lg:-right-20", anim: { x: [0, 6, 0] } },
+const statusRows = [
+  { label: "Statut", value: "Disponible pour de nouvelles missions" },
+  { label: "Basé à", value: "Abidjan, Côte d'Ivoire" },
+  { label: "Stack principale", value: "Next.js · Nest.js · PostgreSQL" },
+  { label: "Livré", value: "9+ applications en production" },
 ];
 
 export const Hero = () => {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center pt-24 pb-16 px-4 neural-grid relative overflow-hidden"
+      className="min-h-screen flex items-center pt-28 pb-20 px-4 relative overflow-hidden"
     >
-      {/* Ambient blobs */}
-      <div className="absolute top-1/3 -left-48 w-[500px] h-[500px] bg-primary/8 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-48 w-[500px] h-[500px] bg-accent/8 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-10 right-1/3 w-72 h-72 bg-secondary/5 rounded-full blur-3xl pointer-events-none" />
-
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 lg:gap-16 items-center max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-16 lg:gap-14 items-start max-w-6xl mx-auto">
 
-          {/* â”€â”€ LEFT COLUMN â”€â”€ */}
+          {/* ── LEFT COLUMN ── */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            {/* Available badge */}
             <motion.div
-              className="flex items-center gap-2.5 mb-7"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
+              className="flex items-center gap-2.5 mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ delay: 0.1 }}
             >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute h-full w-full rounded-full bg-primary opacity-75" />
-                <span className="relative rounded-full h-2.5 w-2.5 bg-primary" />
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
-              <Badge
-                variant="outline"
-                className="text-primary border-primary/30 bg-primary/5 font-body text-xs tracking-wide"
-              >
-                Disponible pour de nouvelles opportunitÃ©s
-              </Badge>
+              <span className="eyebrow">Développeur Full-Stack — Dossier professionnel</span>
             </motion.div>
 
-            {/* Name */}
             <motion.h1
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 font-heading leading-tight"
-              initial={{ opacity: 0, y: 20 }}
+              className="text-5xl sm:text-6xl lg:text-7xl font-display font-semibold mb-6 leading-[0.98] tracking-tight"
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              transition={{ delay: 0.15, duration: 0.5 }}
             >
-              <span className="text-foreground">COULIBALY</span>
+              Coulibaly
               <br />
-              <span className="gradient-text">Founibigue Issa</span>
+              <span className="text-primary">Founibigue Issa</span>
             </motion.h1>
 
-            {/* Role */}
+            <motion.p
+              className="text-base sm:text-lg text-muted-foreground mb-10 max-w-xl leading-relaxed"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 }}
+            >
+              Je conçois et livre des systèmes de gestion, back-offices et plateformes web pour de
+              vraies entreprises — ERP, caisses, back-offices immobiliers, associatifs et
+              universitaires. En stage chez <span className="text-foreground font-medium">Lunion-Lab</span>,
+              où j&apos;ai livré <span className="text-foreground font-medium">9+ applications</span> en
+              production sur le stack <span className="text-foreground font-medium">Next.js / Nest.js / PostgreSQL</span>.
+            </motion.p>
+
+            {/* Status readout — signature panel */}
             <motion.div
-              className="flex flex-wrap items-center gap-3 mb-6"
-              initial={{ opacity: 0, y: 15 }}
+              className="border border-border mb-10 max-w-xl"
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <div className="flex items-center gap-2 text-lg sm:text-xl text-muted-foreground font-heading">
-                <Code2 className="w-5 h-5 text-primary" />
-                <span>DÃ©veloppeur</span>
-                <span className="text-primary font-semibold">Full-Stack</span>
-              </div>
-              <div className="hidden sm:flex items-center gap-1.5 text-sm text-muted-foreground font-body">
-                <Server className="w-3.5 h-3.5 text-violet-400" />
-                <span>Abidjan, CÃ´te d&apos;Ivoire</span>
-              </div>
+              {statusRows.map((row, i) => (
+                <div
+                  key={row.label}
+                  className={`flex items-baseline justify-between gap-4 px-4 py-3 ${i !== statusRows.length - 1 ? "border-b border-border" : ""}`}
+                >
+                  <span className="eyebrow shrink-0">{row.label}</span>
+                  <span className="text-sm font-body text-right text-foreground/90">{row.value}</span>
+                </div>
+              ))}
             </motion.div>
 
-            {/* Description */}
-            <motion.p
-              className="text-base text-muted-foreground mb-8 max-w-xl leading-relaxed font-body"
-              initial={{ opacity: 0, y: 15 }}
+            <motion.div
+              className="flex flex-wrap gap-3 mb-9"
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35 }}
             >
-              DÃ©veloppeur Full-Stack avec expÃ©rience en stage chez{" "}
-              <span className="text-primary font-semibold">Lunion-Lab</span>, oÃ¹ j&apos;ai livrÃ©{" "}
-              <span className="text-primary font-semibold">9+ applications web</span> en production.
-              MaÃ®trise du stack{" "}
-              <span className="text-primary font-semibold">Next.js / Nest.js / PostgreSQL</span> et
-              en cours de certification{" "}
-              <span className="text-accent font-semibold">Java ☕</span>.
-            </motion.p>
-
-            {/* Stats */}
-            <motion.div
-              className="flex flex-wrap gap-8 mb-9 pb-8 border-b border-border/30"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              {stats.map((stat, i) => (
-                <div key={i} className="flex flex-col">
-                  <span className="text-2xl lg:text-3xl font-bold gradient-text font-heading">
-                    {stat.value}
-                  </span>
-                  <span className="text-xs text-muted-foreground font-body mt-0.5">{stat.label}</span>
-                </div>
-              ))}
-              <div className="flex flex-col">
-                <span className="text-2xl lg:text-3xl font-bold gradient-text-gold font-heading">Java</span>
-                <span className="text-xs text-muted-foreground font-body mt-0.5">En certification</span>
-              </div>
-            </motion.div>
-
-            {/* CTA Buttons */}
-            <motion.div
-              className="flex flex-wrap gap-3 mb-7"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45 }}
-            >
               <a href="mailto:niortiencoulibaly2001@gmail.com">
-                <Button size="lg" className="gap-2 neural-border hover-glow font-body">
+                <Button size="lg" className="gap-2">
                   <Mail className="w-4 h-4" />
                   Me contacter
                 </Button>
               </a>
               <a href="#projects">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="gap-2 hover-glow group font-body border-border/60"
-                >
+                <Button size="lg" variant="outline" className="gap-2 group">
                   Voir mes projets
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </a>
             </motion.div>
 
-            {/* Contact row */}
             <motion.div
-              className="flex flex-wrap gap-5 text-sm text-muted-foreground font-body"
+              className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground font-body"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.55 }}
+              transition={{ delay: 0.45 }}
             >
-              <div className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-primary" />
-                <span>Cocody Faya, Abidjan</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Phone className="w-3.5 h-3.5 text-primary" />
-                <span>+225 0767543571</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Mail className="w-3.5 h-3.5 text-primary" />
-                <span className="hidden sm:inline">niortiencoulibaly2001@gmail.com</span>
-              </div>
-              <a
-                href="https://github.com/Niortien"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:text-primary transition-colors"
-              >
-                <Github className="w-3.5 h-3.5 text-primary" />
-                <span>github.com/Niortien</span>
+              <span className="flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5" />
+                Cocody Faya, Abidjan
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Phone className="w-3.5 h-3.5" />
+                +225 07 67 54 35 71
+              </span>
+              <a href="https://github.com/Niortien" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 ink-link hover:text-foreground transition-colors">
+                <Github className="w-3.5 h-3.5" />
+                github.com/Niortien
               </a>
             </motion.div>
           </motion.div>
 
-          {/* â”€â”€ RIGHT COLUMN â€” Image â”€â”€ */}
+          {/* ── RIGHT COLUMN — Photo ── */}
           <motion.div
-            className="flex justify-center lg:justify-end"
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="flex justify-center lg:justify-end lg:pt-3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="relative">
-              {/* Rotating rings */}
-              <motion.div
-                className="absolute inset-0 rounded-full border border-primary/25"
-                style={{ scale: 1.18 }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              />
-              <motion.div
-                className="absolute inset-0 rounded-full border border-accent/15"
-                style={{ scale: 1.35 }}
-                animate={{ rotate: -360 }}
-                transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-              />
-
-              {/* Glow halo */}
-              <div className="absolute inset-0 rounded-full bg-primary/20 blur-2xl scale-150 pointer-events-none" />
-
-              {/* Photo */}
-              <div className="relative z-10">
-                <div className="absolute -inset-1 neural-gradient rounded-full opacity-50 blur-sm" />
-                <Image
-                  src="/assets/image/ma_photo.jpeg"
-                  alt="COULIBALY Founibigue Issa"
-                  width={320}
-                  height={320}
-                  className="relative w-52 h-52 sm:w-60 sm:h-60 lg:w-[280px] lg:h-[280px] rounded-full object-cover border-4 border-background shadow-2xl"
-                  priority
-                />
+            <div className="w-full max-w-[300px]">
+              <div className="register-mark p-3">
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
+                  <Image
+                    src="/assets/image/ma_photo.jpeg"
+                    alt="Coulibaly Founibigue Issa"
+                    fill
+                    sizes="300px"
+                    className="object-cover grayscale-[15%]"
+                    priority
+                  />
+                </div>
               </div>
-
-              {/* Floating tech pills */}
-              {floatingBadges.map((badge, i) => (
-                <motion.div
-                  key={i}
-                  className={`absolute ${badge.pos} z-20 glass rounded-xl px-3 py-1.5 text-xs font-semibold shadow-lg`}
-                  style={{ color: badge.color, border: `1px solid ${badge.color}30` }}
-                  animate={badge.anim}
-                  transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: badge.delay }}
-                >
-                  {badge.text}
-                </motion.div>
-              ))}
-
-              {/* Stack indicator */}
-              <motion.div
-                className="absolute -bottom-10 left-1/2 -translate-x-1/2 z-20 glass rounded-2xl px-4 py-2 flex items-center gap-2 shadow-lg"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 }}
-              >
-                <Layers className="w-3.5 h-3.5 text-primary" />
-                <span className="text-xs font-semibold text-foreground/80 font-body whitespace-nowrap">
-                  Full-Stack Developer
-                </span>
-              </motion.div>
+              <div className="flex items-center justify-between px-1 mt-3">
+                <span className="eyebrow">Réf. CI-DEV-01</span>
+                <span className="eyebrow">Abidjan, 2026</span>
+              </div>
             </div>
           </motion.div>
 

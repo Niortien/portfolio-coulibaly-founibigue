@@ -6,10 +6,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-    --font-lora: var(--font-lora);
-  --font-orbitron: var(--font-orbitron);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -18,11 +17,6 @@
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -45,307 +39,204 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* ── Paper — default light dossier theme ───────────────────────────── */
 :root,
-.dark {
-  --radius: 0.625rem;
-  --background: #030A06;
-  --foreground: #D4F5D4;
-  --card: #081510;
-  --card-foreground: #D4F5D4;
-  --popover: #081510;
-  --popover-foreground: #D4F5D4;
-  --primary: #22C55E;
-  --primary-foreground: #030A06;
-  --secondary: #84CC16;
-  --secondary-foreground: #030A06;
-  --muted: #112218;
-  --muted-foreground: #7BA688;
-  --accent: #4ADE80;
-  --accent-foreground: #030A06;
-  --destructive: #EF4444;
-  --border: #112218;
-  --input: #112218;
-  --ring: #22C55E;
-  --chart-1: #22C55E;
-  --chart-2: #4ADE80;
-  --chart-3: #84CC16;
-  --chart-4: #86EFAC;
-  --chart-5: #16A34A;
-  --sidebar: #030A06;
-  --sidebar-foreground: #D4F5D4;
-  --sidebar-primary: #22C55E;
-  --sidebar-primary-foreground: #030A06;
-  --sidebar-accent: #081510;
-  --sidebar-accent-foreground: #D4F5D4;
-  --sidebar-border: #112218;
-  --sidebar-ring: #22C55E;
-}
-
-.matrix {
-  --background: #010803;
-  --foreground: #E0FAE0;
-  --card: #030A06;
-  --card-foreground: #E0FAE0;
-  --popover: #030A06;
-  --popover-foreground: #E0FAE0;
-  --primary: #4ADE80;
-  --primary-foreground: #010803;
-  --secondary: #A3E635;
-  --secondary-foreground: #010803;
-  --muted: #081510;
-  --muted-foreground: #86EFAC;
-  --accent: #86EFAC;
-  --accent-foreground: #010803;
-  --destructive: #EF4444;
-  --border: #081510;
-  --input: #081510;
-  --ring: #4ADE80;
-  --chart-1: #4ADE80;
-  --chart-2: #86EFAC;
-  --chart-3: #A3E635;
-  --chart-4: #22C55E;
-  --chart-5: #16A34A;
-  --sidebar: #010803;
-  --sidebar-foreground: #E0FAE0;
-  --sidebar-primary: #4ADE80;
-  --sidebar-primary-foreground: #010803;
-  --sidebar-accent: #030A06;
-  --sidebar-accent-foreground: #E0FAE0;
-  --sidebar-border: #081510;
-  --sidebar-ring: #4ADE80;
-}
-
 .light {
-  --background: #FFFFFF;
-  --foreground: #0F172A;
-  --card: #F8FAFC;
-  --card-foreground: #0F172A;
-  --popover: #F8FAFC;
-  --popover-foreground: #0F172A;
-  --primary: #16A34A;
-  --primary-foreground: #FFFFFF;
-  --secondary: #15803D;
-  --secondary-foreground: #FFFFFF;
-  --muted: #F1F5F9;
-  --muted-foreground: #64748B;
-  --accent: #22C55E;
-  --accent-foreground: #FFFFFF;
-  --destructive: #DC2626;
-  --border: #E2E8F0;
-  --input: #E2E8F0;
-  --ring: #16A34A;
-  --chart-1: #16A34A;
-  --chart-2: #22C55E;
-  --chart-3: #15803D;
-  --chart-4: #4ADE80;
-  --chart-5: #84CC16;
-  --sidebar: #F8FAFC;
-  --sidebar-foreground: #0F172A;
-  --sidebar-primary: #16A34A;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #F1F5F9;
-  --sidebar-accent-foreground: #0F172A;
-  --sidebar-border: #E2E8F0;
-  --sidebar-ring: #16A34A;
+  --radius: 0.375rem;
+  --background: #F6F4EE;
+  --foreground: #17181B;
+  --card: #FFFFFF;
+  --card-foreground: #17181B;
+  --popover: #FFFFFF;
+  --popover-foreground: #17181B;
+  --primary: #24365E;
+  --primary-foreground: #F6F4EE;
+  --secondary: #EDEAE0;
+  --secondary-foreground: #17181B;
+  --muted: #EDEAE0;
+  --muted-foreground: #63645C;
+  --accent: #B54B1F;
+  --accent-foreground: #F6F4EE;
+  --destructive: #B3261E;
+  --border: #E1DDCE;
+  --input: #E1DDCE;
+  --ring: #24365E;
+  --sidebar: #F6F4EE;
+  --sidebar-foreground: #17181B;
+  --sidebar-primary: #24365E;
+  --sidebar-primary-foreground: #F6F4EE;
+  --sidebar-accent: #EDEAE0;
+  --sidebar-accent-foreground: #17181B;
+  --sidebar-border: #E1DDCE;
+  --sidebar-ring: #24365E;
 }
 
-/* Light theme: add visible borders since backgrounds are already light */
-.light .glass {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-.light .glass-card {
-  border: 1px solid rgba(0, 0, 0, 0.07);
+/* ── Ledger — dark dossier theme ───────────────────────────────────── */
+.dark {
+  --radius: 0.375rem;
+  --background: #131417;
+  --foreground: #EAE8E1;
+  --card: #1A1C20;
+  --card-foreground: #EAE8E1;
+  --popover: #1A1C20;
+  --popover-foreground: #EAE8E1;
+  --primary: #90A3D1;
+  --primary-foreground: #131417;
+  --secondary: #21242A;
+  --secondary-foreground: #EAE8E1;
+  --muted: #1F2226;
+  --muted-foreground: #97998F;
+  --accent: #E08A54;
+  --accent-foreground: #131417;
+  --destructive: #E5605A;
+  --border: #2A2D33;
+  --input: #2A2D33;
+  --ring: #90A3D1;
+  --sidebar: #131417;
+  --sidebar-foreground: #EAE8E1;
+  --sidebar-primary: #90A3D1;
+  --sidebar-primary-foreground: #131417;
+  --sidebar-accent: #1F2226;
+  --sidebar-accent-foreground: #EAE8E1;
+  --sidebar-border: #2A2D33;
+  --sidebar-ring: #90A3D1;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  
+
   html {
     scroll-behavior: smooth;
   }
-  
-  p {
-    font-family: var(--font-lora);
-  }
-  
-  h1,h2,h3,h4,h5,h6 {
-    font-family: var(--font-orbitron);
-  }
-  
+
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--primary) 22%, transparent);
   }
 
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
   }
   ::-webkit-scrollbar-track {
     background: var(--background);
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 3px;
+    background: var(--border);
+    border-radius: 0;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent);
+    background: var(--muted-foreground);
   }
 }
 
 @layer utilities {
-  .font-heading {
-    font-family: var(--font-orbitron);
+  .font-display {
+    font-family: var(--font-display);
   }
-  
   .font-body {
-    font-family: var(--font-lora);
+    font-family: var(--font-body);
   }
-  
   .font-mono-custom {
-    font-family: var(--font-geist-mono);
+    font-family: var(--font-mono);
   }
 
-  .gradient-text {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Small tracked mono label used to tag sections, project refs, dates */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
   }
 
-  .gradient-text-gold {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .gradient-bg {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--secondary) 100%);
-  }
-
-  .neural-gradient {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--ring) 40%, var(--accent) 70%, var(--secondary) 100%);
-  }
-
-  .cyber-gradient {
-    background: linear-gradient(135deg, var(--background) 0%, var(--primary) 25%, var(--accent) 50%, var(--secondary) 75%, var(--background) 100%);
-  }
-
-  .matrix-gradient {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 30%, var(--ring) 60%, var(--secondary) 100%);
-  }
-
-  .glow-effect {
-    box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 40%, transparent);
-  }
-
-  .neural-glow {
-    box-shadow: 0 0 30px color-mix(in srgb, var(--accent) 30%, transparent);
-  }
-
-  .neural-border {
-    border: 1px solid transparent;
-    background: linear-gradient(var(--card), var(--card)) padding-box,
-                linear-gradient(135deg, var(--primary), var(--accent), var(--secondary)) border-box;
-  }
-
-  .hover-glow:hover {
-    box-shadow: 0 0 40px color-mix(in srgb, var(--primary) 60%, transparent);
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
-  }
-
-  .neural-grid {
-    background-image: 
-      linear-gradient(color-mix(in srgb, var(--primary) 7%, transparent) 1px, transparent 1px),
-      linear-gradient(90deg, color-mix(in srgb, var(--accent) 7%, transparent) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-
-  .glass {
-    background: color-mix(in srgb, var(--background) 65%, transparent);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid color-mix(in srgb, var(--primary) 10%, transparent);
-  }
-
-  .glass-card {
-    background: color-mix(in srgb, var(--card) 55%, transparent);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid color-mix(in srgb, var(--primary) 7%, transparent);
-  }
-
-  .section-divider {
-    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--primary) 50%, transparent), color-mix(in srgb, var(--accent) 50%, transparent), transparent);
+  /* Hairline rule, the primary structural device instead of gradients */
+  .rule {
     height: 1px;
     width: 100%;
+    background: var(--border);
   }
 
-  .circuit-pattern {
-    background-image: 
-      radial-gradient(circle at 20% 50%, color-mix(in srgb, var(--primary) 10%, transparent) 0%, transparent 50%),
-      radial-gradient(circle at 80% 50%, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 50%),
-      radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--secondary) 10%, transparent) 0%, transparent 50%);
-    background-size: 60px 60px;
+  /* Corner ticks — a drafting-table register mark used sparingly as the page's signature */
+  .register-mark {
+    position: relative;
+  }
+  .register-mark::before,
+  .register-mark::after {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border: 1.5px solid var(--accent);
+    opacity: 0.9;
+  }
+  .register-mark::before {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+  }
+  .register-mark::after {
+    bottom: -1px;
+    right: -1px;
+    border-left: none;
+    border-top: none;
   }
 
-  .glitch-animation {
-    animation: glitch 3s infinite;
+  .dossier-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .dossier-card:hover {
+    border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
   }
 
-  @keyframes glitch {
-    0%, 100% {
-      text-shadow: 2px 0 var(--primary), -2px 0 var(--accent);
-    }
-    25% {
-      text-shadow: -2px 0 var(--secondary), 2px 0 var(--ring);
-    }
-    50% {
-      text-shadow: 2px 0 var(--accent), -2px 0 var(--primary);
-    }
-    75% {
-      text-shadow: -2px 0 var(--ring), 2px 0 var(--secondary);
-    }
+  .ink-link {
+    position: relative;
+  }
+  .ink-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: -2px;
+    height: 1px;
+    background: currentColor;
+    transition: right 0.25s ease;
+  }
+  .ink-link:hover::after {
+    right: 0;
   }
 
-  .neural-pulse {
-    animation: neuralPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes neuralPulse {
-    0%, 100% {
-      box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 40%, transparent);
-    }
-    50% {
-      box-shadow: 0 0 40px color-mix(in srgb, var(--accent) 60%, transparent);
-    }
-  }
-
-  .pulse-animation {
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.7;
-    }
+  .grain {
+    background-image: radial-gradient(color-mix(in srgb, var(--foreground) 6%, transparent) 0.5px, transparent 0.5px);
+    background-size: 3px 3px;
   }
 
   .float-animation {
-    animation: float 3s ease-in-out infinite;
+    animation: float 4s ease-in-out infinite;
   }
 
   @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .float-animation {
+      animation: none;
     }
   }
 }

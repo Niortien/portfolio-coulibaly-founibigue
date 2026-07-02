@@ -2,7 +2,6 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Code2, Database, Layers, Smartphone } from "lucide-react";
 
 const levelToPercent: Record<string, number> = {
   Expert: 95,
@@ -11,18 +10,10 @@ const levelToPercent: Record<string, number> = {
   "En cours": 25,
 };
 
-const levelColor: Record<string, string> = {
-  Expert: "#22C55E",
-  Avancé: "#4ADE80",
-  Intermédiaire: "#84CC16",
-  "En cours": "#86EFAC",
-};
-
 const skillCategories = [
   {
     title: "Frontend",
-    icon: Code2,
-    color: "#22C55E",
+    code: "FE",
     skills: [
       { name: "React.js", level: "Avancé" },
       { name: "Next.js", level: "Avancé" },
@@ -34,8 +25,7 @@ const skillCategories = [
   },
   {
     title: "Backend",
-    icon: Layers,
-    color: "#4ADE80",
+    code: "BE",
     skills: [
       { name: "Node.js", level: "Avancé" },
       { name: "Express.js", level: "Avancé" },
@@ -47,8 +37,7 @@ const skillCategories = [
   },
   {
     title: "Base de données",
-    icon: Database,
-    color: "#84CC16",
+    code: "DB",
     skills: [
       { name: "MongoDB", level: "Avancé" },
       { name: "SQL", level: "Avancé" },
@@ -56,9 +45,8 @@ const skillCategories = [
     ],
   },
   {
-    title: "Mobile & Autres",
-    icon: Smartphone,
-    color: "#86EFAC",
+    title: "Mobile & Outils",
+    code: "OPS",
     skills: [
       { name: "Flutter", level: "Intermédiaire" },
       { name: "Dart", level: "Intermédiaire" },
@@ -68,35 +56,23 @@ const skillCategories = [
   },
 ];
 
-const getLevelColor = (level: string) => {
-  switch (level) {
-    case "Expert": return "text-primary font-bold border-primary/40 bg-primary/15";
-    case "Avancé": return "text-accent border-accent/30 bg-accent/10";
-    case "Intermédiaire": return "text-muted-foreground border-border bg-muted/50";
-    case "En cours": return "text-secondary border-secondary/30 bg-secondary/10";
-    default: return "text-muted-foreground bg-muted border-border";
-  }
-};
-
-const SkillBar = ({ name, level, color }: { name: string; level: string; color: string }) => {
+const SkillBar = ({ name, level }: { name: string; level: string }) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const pct = levelToPercent[level] ?? 40;
-  const barColor = levelColor[level] ?? color;
 
   return (
-    <div ref={ref} className="mb-4">
+    <div ref={ref} className="mb-4 last:mb-0">
       <div className="flex items-center justify-between mb-1.5">
-        <span className="text-sm font-medium text-foreground/90 font-body">{name}</span>
-        <span className={`text-xs px-2 py-0.5 rounded-full border font-body ${getLevelColor(level)}`}>{level}</span>
+        <span className="text-sm text-foreground/90">{name}</span>
+        <span className="eyebrow">{level}</span>
       </div>
-      <div className="h-1.5 w-full rounded-full bg-muted/60 overflow-hidden">
+      <div className="h-[3px] w-full bg-muted overflow-hidden">
         <motion.div
-          className="h-full rounded-full"
-          style={{ background: `linear-gradient(90deg, ${barColor}99, ${barColor})` }}
+          className="h-full bg-primary"
           initial={{ width: 0 }}
           animate={{ width: inView ? `${pct}%` : 0 }}
-          transition={{ duration: 1, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 0.9, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
       </div>
     </div>
@@ -108,54 +84,44 @@ export const Skills = () => {
   const titleInView = useInView(titleRef, { once: true, margin: "-80px" });
 
   return (
-    <section id="skills" className="py-16 lg:py-24 px-4 bg-muted/20 relative overflow-hidden">
-      <div className="absolute inset-0 neural-grid opacity-30 pointer-events-none" />
-      <div className="container mx-auto relative z-10">
+    <section id="skills" className="py-20 lg:py-28 px-4 border-y border-border bg-secondary/20">
+      <div className="container mx-auto">
         <div className="max-w-6xl mx-auto">
           <motion.div
             ref={titleRef}
-            className="text-center mb-12 lg:mb-16"
-            initial={{ opacity: 0, y: 30 }}
+            className="mb-14 lg:mb-16 max-w-2xl"
+            initial={{ opacity: 0, y: 20 }}
             animate={titleInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6 font-heading">
-              Compétences <span className="gradient-text">Techniques</span>
+            <span className="eyebrow">04 — Compétences</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold mt-3 mb-4">
+              Stack technique
             </h2>
-            <div className="section-divider mx-auto mb-6" />
-            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto font-body">
-              Technologies et outils que je maîtrise pour créer des applications modernes
+            <p className="text-base lg:text-lg text-muted-foreground">
+              Technologies et outils utilisés au quotidien pour concevoir et livrer des applications.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            {skillCategories.map((category, index) => {
-              const Icon = category.icon;
-              return (
-                <motion.div
-                  key={index}
-                  className="glass-card rounded-2xl p-6 lg:p-7"
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -4 }}
-                >
-                  <div className="flex items-center gap-3 mb-6">
-                    <div
-                      className="p-2.5 rounded-xl"
-                      style={{ background: `${category.color}18`, border: `1px solid ${category.color}30` }}
-                    >
-                      <Icon className="w-5 h-5" style={{ color: category.color }} />
-                    </div>
-                    <h3 className="text-lg font-bold font-heading text-foreground/90">{category.title}</h3>
-                  </div>
-                  {category.skills.map((skill, idx) => (
-                    <SkillBar key={idx} name={skill.name} level={skill.level} color={category.color} />
-                  ))}
-                </motion.div>
-              );
-            })}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+            {skillCategories.map((category, index) => (
+              <motion.div
+                key={index}
+                className="dossier-card p-6 lg:p-7"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+              >
+                <div className="flex items-center justify-between mb-6 pb-4 border-b border-border">
+                  <h3 className="text-lg font-display font-semibold">{category.title}</h3>
+                  <span className="font-mono text-xs text-muted-foreground">{category.code}</span>
+                </div>
+                {category.skills.map((skill, idx) => (
+                  <SkillBar key={idx} name={skill.name} level={skill.level} />
+                ))}
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
