@@ -189,7 +189,7 @@ const projects = [
     ],
     impact: "Optimisation de la gestion des inventaires et réduction des ruptures de stock pour les entreprises",
     technologies: ["Next.js", "React.js", "Vercel", "Dashboard", "Inventaire"],
-    image: "/assets/image/tubo_system.png",
+    image: "/assets/image/stock.jpg",
     link: "https://stock-pro-six.vercel.app/stock",
     github: "#",
     type: "Personnel",
