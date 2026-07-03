@@ -314,6 +314,23 @@ const projects = [
     type: "Professionnel",
     accent: "#7A3B3B",
   },
+  {
+    code: "EDUCATION",
+    title: "Ephrata",
+    description: "Site vitrine pour un établissement scolaire : présentation des classes, galerie photo et palmarès des résultats.",
+    tasks: [
+      "Développement du site vitrine avec présentation des classes et du programme pédagogique",
+      "Galerie photo interactive et carrousel des événements de l'école",
+      "Section palmarès mettant en avant les résultats et réussites des élèves",
+    ],
+    impact: "Présence digitale moderne pour l'établissement, facilitant l'information aux parents et futurs élèves",
+    technologies: ["Next.js", "React.js", "GSAP", "Framer Motion", "Tailwind CSS"],
+    image: "/assets/image/ephrata_logo.png",
+    link: "https://site-ephrata.vercel.app/",
+    github: "#",
+    type: "Freelance",
+    accent: "#4A6B8C",
+  },
 ];
 
 const containerVariants: Variants = {
