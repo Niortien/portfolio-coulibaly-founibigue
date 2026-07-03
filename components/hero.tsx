@@ -59,7 +59,7 @@ export const Hero = () => {
             >
               Je conçois et livre des systèmes de gestion, back-offices et plateformes web pour de
               vraies entreprises — ERP, caisses, back-offices immobiliers, associatifs et
-              universitaires. En stage chez <span className="text-foreground font-medium">Lunion-Lab</span>,
+              universitaires. Développeur Full-Stack chez <span className="text-foreground font-medium">Lunion-Lab</span>,
               où j&apos;ai livré <span className="text-foreground font-medium">9+ applications</span> en
               production sur le stack <span className="text-foreground font-medium">Next.js / Nest.js / PostgreSQL</span>.
             </motion.p>

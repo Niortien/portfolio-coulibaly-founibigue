@@ -297,6 +297,23 @@ const projects = [
     type: "Personnel",
     accent: "#6B4A9C",
   },
+  {
+    code: "SECU",
+    title: "Lunion Sécure Parcours",
+    description: "Plateforme de gestion du personnel pour les entreprises de sécurité privée : back-office web, SaaS multi-tenant et application desktop pour le suivi des agents.",
+    tasks: [
+      "Back-office Next.js pour la gestion du personnel, des présences, des demandes et de la messagerie interne",
+      "Version SaaS multi-tenant avec espace public et dashboard protégé (architecture multilingue)",
+      "Application desktop Windows pour la supervision du back-office sur site",
+    ],
+    impact: "Centralisation du suivi des agents de sécurité (présences, demandes, communication) sur une seule plateforme",
+    technologies: ["Next.js", "Nest.js", "TypeScript", "SaaS", "Multi-tenant"],
+    image: "/assets/image/logo_secure.png",
+    link: "#",
+    github: "#",
+    type: "Professionnel",
+    accent: "#7A3B3B",
+  },
 ];
 
 const containerVariants: Variants = {

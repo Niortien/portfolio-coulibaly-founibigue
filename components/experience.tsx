@@ -8,10 +8,10 @@ import { MapPin, ExternalLink } from "lucide-react";
 const experiences = [
   {
     company: "Lunion-Lab",
-    role: "Stage Développeur Web",
+    role: "Développeur Full-Stack",
     location: "Abidjan, Cocody",
-    duration: "6 mois",
-    period: "2025 — 2026",
+    duration: "CDI",
+    period: "Août 2025 — Aujourd'hui",
     tasks: [
       "Développement d'APIs REST robustes avec Nest.js pour la gestion des données de multiples modules métiers",
       "Réalisation du site officiel de l'entreprise avec Next.js et React.js, optimisé SEO (score Lighthouse > 90)",
@@ -31,6 +31,7 @@ const experiences = [
       { name: "Catholikia", description: "Application pour la communauté catholique", link: "https://catholikia.com/fr" },
       { name: "OSA FC", description: "Site officiel du club de football OSA FC", link: "https://osa-website-alpha.vercel.app/" },
       { name: "Paroisse St Sauveur", description: "Back-office de gestion paroissiale", link: "https://back-office-paroisse-st-sauveur-mis.vercel.app" },
+      { name: "Meet Lunion", description: "Plateforme de visioconférence interne de Lunion-Lab", link: "https://meet.lunion-lab.com/" },
     ],
   },
   {
