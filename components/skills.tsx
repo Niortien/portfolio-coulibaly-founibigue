@@ -7,6 +7,7 @@ const levelToPercent: Record<string, number> = {
   Expert: 95,
   Avancé: 80,
   Intermédiaire: 55,
+  Débutant: 30,
   "En cours": 25,
 };
 
@@ -30,7 +31,7 @@ const skillCategories = [
       { name: "Node.js", level: "Avancé" },
       { name: "Express.js", level: "Avancé" },
       { name: "Nest.js", level: "Intermédiaire" },
-      { name: "Java", level: "En cours" },
+      { name: "Java", level: "Intermédiaire" },
       { name: "Python", level: "Intermédiaire" },
       { name: "WinDev", level: "Intermédiaire" },
     ],
@@ -42,6 +43,9 @@ const skillCategories = [
       { name: "MongoDB", level: "Avancé" },
       { name: "SQL", level: "Avancé" },
       { name: "MERISE", level: "Intermédiaire" },
+      { name: "UML", level: "Avancé" },
+      { name: "TypeORM", level: "Avancé" },
+      { name: "Prisma", level: "Avancé" },
     ],
   },
   {
@@ -52,6 +56,7 @@ const skillCategories = [
       { name: "Dart", level: "Intermédiaire" },
       { name: "Git", level: "Avancé" },
       { name: "API REST", level: "Avancé" },
+      { name: "Docker", level: "Débutant" },
     ],
   },
 ];

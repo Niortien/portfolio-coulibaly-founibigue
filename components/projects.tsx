@@ -175,7 +175,7 @@ const projects = [
     image: "/assets/image/drivale_logo.jpeg",
     link: "https://dri-vale.online",
     github: "#",
-    type: "Personnel",
+    type: "Freelance",
     accent: "#8A5A34",
   },
   {
@@ -192,7 +192,7 @@ const projects = [
     image: "/assets/image/stock.jpg",
     link: "https://stock-pro-six.vercel.app/stock",
     github: "#",
-    type: "Personnel",
+    type: "Freelance",
     accent: "#3E7A6D",
   },
   {
@@ -209,7 +209,7 @@ const projects = [
     image: "/assets/image/upb.jpg",
     link: "https://univeriste-polytechnique-de-bingerville.vercel.app/",
     github: "#",
-    type: "Personnel",
+    type: "Freelance",
     accent: "#2E4A7D",
   },
   {
@@ -243,7 +243,7 @@ const projects = [
     image: "/assets/image/logo_lunion.png",
     link: "#",
     github: "#",
-    type: "Personnel",
+    type: "Freelance",
     accent: "#4B6B2C",
   },
   {
@@ -294,7 +294,7 @@ const projects = [
     image: "/assets/image/hotel.png",
     link: "https://gestion-hotel-delta.vercel.app/dashboard",
     github: "#",
-    type: "Personnel",
+    type: "Freelance",
     accent: "#6B4A9C",
   },
   {
@@ -304,10 +304,10 @@ const projects = [
     tasks: [
       "Back-office Next.js pour la gestion du personnel, des présences, des demandes et de la messagerie interne",
       "Version SaaS multi-tenant avec espace public et dashboard protégé (architecture multilingue)",
-      "Application desktop Windows pour la supervision du back-office sur site",
+      "Application desktop Windows (Flutter) pour la supervision du back-office sur site",
     ],
     impact: "Centralisation du suivi des agents de sécurité (présences, demandes, communication) sur une seule plateforme",
-    technologies: ["Next.js", "Nest.js", "TypeScript", "SaaS", "Multi-tenant"],
+    technologies: ["Next.js", "Nest.js", "Flutter", "TypeScript", "SaaS", "Multi-tenant"],
     image: "/assets/image/logo_secure.png",
     link: "#",
     github: "#",

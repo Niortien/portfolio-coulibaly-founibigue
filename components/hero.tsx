@@ -8,6 +8,7 @@ import Image from "next/image";
 const statusRows = [
   { label: "Statut", value: "Disponible pour de nouvelles missions" },
   { label: "Basé à", value: "Abidjan, Côte d'Ivoire" },
+  { label: "Développeur depuis", value: "2022" },
   { label: "Stack principale", value: "Next.js · Nest.js · PostgreSQL" },
   { label: "Livré", value: "9+ applications en production" },
 ];

@@ -72,6 +72,9 @@ export const Experience = () => {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold mt-3">
               Expérience professionnelle
             </h2>
+            <p className="text-base lg:text-lg text-muted-foreground mt-4 max-w-2xl">
+              Développeur depuis 2022, avec une expérience professionnelle construite à travers stages et poste actuel en CDI chez Lunion-Lab.
+            </p>
           </motion.div>
 
           <div className="space-y-14">
