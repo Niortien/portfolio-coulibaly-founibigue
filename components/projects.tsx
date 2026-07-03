@@ -331,6 +331,40 @@ const projects = [
     type: "Freelance",
     accent: "#4A6B8C",
   },
+  {
+    code: "RELIGIEUX",
+    title: "Salam",
+    description: "Site vitrine pour une mosquée : horaires de prière, calendrier islamique et vie communautaire.",
+    tasks: [
+      "Intégration d'une API d'horaires de prière avec mise à jour automatique selon la localisation",
+      "Calendrier islamique, verset et zikr du jour, et section khutbah (sermon)",
+      "Sections communauté et histoire de la mosquée avec formulaire de contact",
+    ],
+    impact: "Accès facilité aux horaires de prière et renforcement du lien communautaire des fidèles",
+    technologies: ["Next.js", "React.js", "API REST", "Tailwind CSS"],
+    image: "/assets/image/salam_logo.png",
+    link: "https://salam-taupe.vercel.app/",
+    github: "#",
+    type: "Freelance",
+    accent: "#6B8C4A",
+  },
+  {
+    code: "HOTELLERIE",
+    title: "Hôtel Poro — Korhogo",
+    description: "Site vitrine et réservation en ligne pour l'Hôtel Poro à Korhogo, au cœur de la culture Sénoufo, cité créative UNESCO 2025.",
+    tasks: [
+      "Présentation des chambres (standard, supérieure, suite) avec galeries photos",
+      "Système de réservation en ligne et présentation de l'histoire de l'hôtel et de la région",
+      "Interface d'administration pour la gestion du contenu et des demandes",
+    ],
+    impact: "Vitrine digitale valorisant l'hôtel et la culture locale, avec réservation en ligne facilitée pour les clients",
+    technologies: ["Next.js", "React.js", "TanStack Query", "React Hook Form", "Zod"],
+    image: "/assets/image/hotel_korhogo.jpg",
+    link: "https://hotel-korhogo.vercel.app/",
+    github: "#",
+    type: "Freelance",
+    accent: "#8C5A2E",
+  },
 ];
 
 const containerVariants: Variants = {
