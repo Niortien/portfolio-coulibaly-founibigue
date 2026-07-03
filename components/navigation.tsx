@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const navItems = [
   { name: "Accueil", href: "#hero" },
@@ -88,26 +89,30 @@ export const Navigation = () => {
                 </Link>
               );
             })}
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden flex h-9 w-9 items-center justify-center border border-border cursor-pointer"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Ouvrir le menu"
-          >
-            <AnimatePresence mode="wait">
-              {isOpen ? (
-                <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                  <X className="h-4 w-4" />
-                </motion.span>
-              ) : (
-                <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                  <Menu className="h-4 w-4" />
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </button>
+          <div className="flex md:hidden items-center gap-2">
+            <ThemeToggle />
+            <button
+              className="flex h-9 w-9 items-center justify-center border border-border cursor-pointer"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Ouvrir le menu"
+            >
+              <AnimatePresence mode="wait">
+                {isOpen ? (
+                  <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                    <X className="h-4 w-4" />
+                  </motion.span>
+                ) : (
+                  <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                    <Menu className="h-4 w-4" />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}

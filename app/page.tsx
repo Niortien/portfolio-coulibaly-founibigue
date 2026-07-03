@@ -5,12 +5,10 @@ import { Hero } from "@/components/hero";
 import { Navigation } from "@/components/navigation";
 import { Projects } from "@/components/projects";
 import { Skills } from "@/components/skills";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
   return (
     <div>
-      <ThemeToggle />
       <Navigation />
       <Hero />
       <Experience />

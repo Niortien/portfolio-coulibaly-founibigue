@@ -27,7 +27,7 @@ export const ThemeToggle = () => {
       onClick={toggle}
       aria-label="Changer de thème"
       title={theme === "light" ? "Passer en mode sombre" : "Passer en mode clair"}
-      className="fixed top-5 right-4 lg:top-6 lg:right-8 z-50 flex h-9 w-9 items-center justify-center border border-border bg-card text-foreground hover:border-primary/50 transition-colors cursor-pointer"
+      className="flex h-9 w-9 items-center justify-center border border-border bg-card text-foreground hover:border-primary/50 transition-colors cursor-pointer shrink-0"
       suppressHydrationWarning
     >
       {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
