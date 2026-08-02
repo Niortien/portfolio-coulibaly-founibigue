@@ -11,7 +11,7 @@ const experiences = [
     role: "Développeur Full-Stack",
     location: "Abidjan, Cocody",
     duration: "CDI",
-    period: "Août 2025 — Aujourd'hui",
+    period: "Août 2024 — Aujourd'hui",
     tasks: [
       "Développement d'APIs REST robustes avec Nest.js pour la gestion des données de multiples modules métiers",
       "Réalisation du site officiel de l'entreprise avec Next.js et React.js, optimisé SEO (score Lighthouse > 90)",
