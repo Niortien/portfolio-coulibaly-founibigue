@@ -1,143 +1,45 @@
-"use client";
+import { ArrowUpRight } from "@/components/icons";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, Linkedin, Github, ArrowRight } from "lucide-react";
-import Link from "next/link";
+const MAIL = "niortiencoulibaly2001@gmail.com";
 
-const contactInfo = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: "niortiencoulibaly2001@gmail.com",
-    href: "mailto:niortiencoulibaly2001@gmail.com",
-  },
-  {
-    icon: Phone,
-    label: "Téléphone",
-    value: "+225 07 67 54 35 71",
-    href: "tel:+2250767543571",
-  },
-  {
-    icon: MapPin,
-    label: "Localisation",
-    value: "Cocody Faya, Abidjan, Côte d'Ivoire",
-    href: "#",
-  },
-];
-
-export const Contact = () => {
-  const titleRef = useRef(null);
-  const titleInView = useInView(titleRef, { once: true, margin: "-80px" });
-
+/** Appel final : l'e-mail en grand, trois boutons, coordonnées. L'anneau tourne derrière. */
+export function Contact() {
   return (
-    <section id="contact" className="py-20 lg:py-28 px-4">
-      <div className="container mx-auto">
-        <div className="max-w-4xl mx-auto">
-
-          <motion.div
-            ref={titleRef}
-            className="mb-14 lg:mb-16 max-w-2xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={titleInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="eyebrow">06 — Contact</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold mt-3">
-              Travaillons ensemble
-            </h2>
-          </motion.div>
-
-          {/* Contact info */}
-          <div className="grid grid-cols-1 md:grid-cols-3 border border-border mb-6 lg:mb-8">
-            {contactInfo.map((info, index) => {
-              const Icon = info.icon;
-              return (
-                <motion.div
-                  key={index}
-                  className={`p-6 ${index !== contactInfo.length - 1 ? "border-b md:border-b-0 md:border-r border-border" : ""}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.4, delay: index * 0.08 }}
-                >
-                  <Icon className="w-4 h-4 text-primary mb-4" />
-                  <p className="eyebrow mb-2">{info.label}</p>
-                  {info.href !== "#" ? (
-                    <a href={info.href} className="text-sm text-foreground/85 hover:text-primary transition-colors break-words">
-                      {info.value}
-                    </a>
-                  ) : (
-                    <p className="text-sm text-foreground/85">{info.value}</p>
-                  )}
-                </motion.div>
-              );
-            })}
+    <section id="contact" className="sec" style={{ paddingBottom: "clamp(56px, 8vw, 96px)" }} aria-labelledby="contact-titre">
+      <div className="wrap">
+        <div className="contact rv">
+          <div className="ring" aria-hidden="true">
+            <svg className="spin" viewBox="0 0 128 128">
+              <defs>
+                <path id="ringpath" d="M64,64 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0" />
+              </defs>
+              <text fontFamily="var(--font-mono), monospace" fontSize="10.5" letterSpacing="1.6" fill="#93A0B0">
+                <textPath href="#ringpath">DISPONIBLE · FULL-STACK · ABIDJAN · </textPath>
+              </text>
+            </svg>
+            <span className="ring-c"><ArrowUpRight size={26} /></span>
           </div>
-
-          {/* CTA */}
-          <motion.div
-            className="border border-border bg-secondary/30 p-8 lg:p-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-          >
-            <div className="max-w-lg">
-              <span className="eyebrow">Disponible</span>
-              <h3 className="text-2xl lg:text-3xl font-display font-semibold mt-3 mb-3">
-                Un projet en tête ?
-              </h3>
-              <p className="text-muted-foreground text-base mb-8 leading-relaxed">
-                Je suis disponible pour des missions en développement web Full-Stack.
-                Contactez-moi pour en discuter.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Button size="lg" className="gap-2" asChild>
-                  <Link href="mailto:niortiencoulibaly2001@gmail.com">
-                    <Mail className="w-4 h-4" />
-                    Envoyer un email
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </Button>
-                <Button size="lg" variant="outline" className="gap-2" asChild>
-                  <a href="tel:+2250767543571">
-                    <Phone className="w-4 h-4" />
-                    Appeler
-                  </a>
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Social */}
-          <motion.div
-            className="flex items-center justify-center gap-3 mt-10"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <Button size="icon" variant="outline" asChild>
-              <a href="#" aria-label="LinkedIn">
-                <Linkedin className="w-4 h-4" />
-              </a>
-            </Button>
-            <Button size="icon" variant="outline" asChild>
-              <a href="https://github.com/Niortien" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <Github className="w-4 h-4" />
-              </a>
-            </Button>
-          </motion.div>
+          <div className="eyebrow">06 — Contact</div>
+          <h2 id="contact-titre" className="h2" style={{ maxWidth: 760 }}>Un poste ou un projet ? Parlons-en.</h2>
+          <p className="lead">Disponible pour un poste de développeur Full-Stack ou des missions, à Abidjan ou à distance.</p>
+          <div style={{ marginTop: 40 }}>
+            <a className="big-mail" href={`mailto:${MAIL}`}>{MAIL}</a>
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 32 }}>
+            <a className="btn btn-p" href={`mailto:${MAIL}`}>
+              Envoyer un email
+              <ArrowUpRight />
+            </a>
+            <a className="btn btn-g" href="tel:+2250767543571">Appeler</a>
+            <a className="btn btn-g" href="https://github.com/Niortien" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+          <div className="cinfo">
+            <div><div className="ci-l">Téléphone</div><div className="ci-v">+225 07 67 54 35 71 · 05 44 61 33 25</div></div>
+            <div><div className="ci-l">Localisation</div><div className="ci-v">Cocody Faya, Abidjan</div></div>
+            <div><div className="ci-l">GitHub</div><a className="ci-v" href="https://github.com/Niortien" target="_blank" rel="noopener noreferrer" style={{ display: "block" }}>github.com/Niortien</a></div>
+          </div>
         </div>
       </div>
-
-      <footer className="mt-16 lg:mt-24 pt-8 border-t border-border max-w-4xl mx-auto text-center">
-        <p className="text-sm text-muted-foreground">
-          © 2026 Coulibaly Founibigue Issa — Développeur Full-Stack
-        </p>
-      </footer>
     </section>
   );
-};
+}

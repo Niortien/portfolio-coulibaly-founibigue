@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Bricolage_Grotesque, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 
-const displayFont = Space_Grotesk({
+const displayFont = Bricolage_Grotesque({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
 });
 
 const bodyFont = IBM_Plex_Sans({
@@ -22,7 +22,8 @@ const monoFont = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: "Coulibaly Founibigue Issa — Développeur Full-Stack",
-  description: "Développeur Full-Stack basé à Abidjan. Conception et livraison de systèmes de gestion, back-offices et plateformes web en production pour entreprises, commerces et institutions.",
+  description:
+    "Développeur Full-Stack basé à Abidjan. Conception et livraison de systèmes de gestion, back-offices et plateformes web en production pour entreprises, commerces et institutions.",
   keywords: ["développeur web", "portfolio", "Coulibaly Founibigue Issa Niortien", "Next.js", "Nest.js", "Abidjan", "Côte d'Ivoire"],
   authors: [{ name: "Coulibaly Founibigue Issa Niortien" }],
   openGraph: {
@@ -33,25 +34,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport = { themeColor: "#0B0F14" };
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem("theme")||"light";document.documentElement.classList.add(t);}catch(e){}`,
-          }}
-        />
-      </head>
-      <body
-        className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html lang="fr" className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
