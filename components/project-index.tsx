@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { PROJECTS, type IndexedProject } from "@/lib/projects";
 import { ArrowUpRight } from "@/components/icons";
+import { ProjectThumb } from "@/components/project-thumb";
 
 type FilterKey = "all" | "g" | "s" | "live";
 
@@ -42,9 +43,12 @@ export function ProjectIndex() {
           {rows.map(({ p, num }, i) => (
             <li key={`${filter}-${p.name}`} className="row" style={{ animationDelay: `${i * 35}ms` }}>
               <span className="row-num">{num}</span>
-              <div style={{ minWidth: 0 }}>
-                <div className="row-title">{p.name}</div>
-                <div className="row-sub">{p.sector} · {p.context}</div>
+              <div className="row-id">
+                <ProjectThumb name={p.name} image={p.image} />
+                <div style={{ minWidth: 0 }}>
+                  <div className="row-title">{p.name}</div>
+                  <div className="row-sub">{p.sector} · {p.context}</div>
+                </div>
               </div>
               <span className="row-stack">{p.stack}</span>
               <div className="row-end">
