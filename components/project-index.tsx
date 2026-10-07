@@ -57,6 +57,14 @@ export function ProjectIndex() {
                   <span className="row-int">Projet interne</span>
                 )}
               </div>
+              <div className="row-desc">
+                <p>
+                  <b>À quoi il sert —</b> {p.purpose}
+                </p>
+                <p>
+                  <b>Pourquoi c&rsquo;est important —</b> {p.impact}
+                </p>
+              </div>
             </li>
           ))}
         </ul>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowUpRight } from "@/components/icons";
 
 const TITLE = ["Je", "conçois", "et", "livre", "des", "systèmes", "de", "gestion", "qui", "tournent"];
@@ -28,7 +29,11 @@ export function Hero() {
             </span>
           </div>
           <div className="fade" style={{ display: "flex", alignItems: "center", gap: 16, animationDelay: ".1s" }}>
-            <span className="avatar" aria-hidden="true">CF</span>
+            <span className="avatar">
+              <span style={{ position: "absolute", inset: 0, borderRadius: "50%", overflow: "hidden" }}>
+                <Image src="/assets/image/ma_photo.jpeg" alt="Portrait de Coulibaly Founibigue Issa" fill priority sizes="96px" style={{ objectFit: "cover", objectPosition: "50% 18%" }} />
+              </span>
+            </span>
             <div>
               <div style={{ fontWeight: 600, fontSize: 17, lineHeight: 1.3 }}>Coulibaly Founibigue Issa</div>
               <div style={{ fontSize: 14.5, color: "#93A0B0", lineHeight: 1.4 }}>Développeur Full-Stack · Abidjan, Côte d&rsquo;Ivoire</div>

@@ -7,6 +7,7 @@ interface Featured {
   context: string;
   title: string;
   description: string;
+  purpose: string;
   keyValue: string;
   keyLabel: string;
   tasks: string[];
@@ -65,6 +66,7 @@ const fleet = (
 const FEATURED: Featured[] = [
   {
     index: "01", sector: "ERP · Logistique", context: "Professionnel", title: "Turbo ERP",
+    purpose: "Une entreprise de livraison pilote ses équipes, ses finances et sa logistique depuis un seul logiciel, au lieu de plusieurs fichiers dispersés.",
     description: "Système de gestion intégré qui centralise les opérations, les ressources humaines et les processus métiers.",
     keyValue: "4", keyLabel: "modules métiers développés : RH, finances, logistique et reporting analytique",
     tasks: [
@@ -78,6 +80,7 @@ const FEATURED: Featured[] = [
   },
   {
     index: "02", sector: "Commerce", context: "Freelance", title: "Dri Valé — Gestion boutique",
+    purpose: "Le commerçant encaisse en caisse, voit son stock en temps réel dans ses deux boutiques et présente ses vêtements aux clients sur un site en ligne.",
     description: "Système complet pour une boutique de vêtements à Yopougon : caisse, stock, entrées/sorties et vitrine en ligne.",
     keyValue: "3 en 1", keyLabel: "caisse, stock en temps réel et vitrine en ligne réunis sur une seule plateforme",
     tasks: [
@@ -91,6 +94,7 @@ const FEATURED: Featured[] = [
   },
   {
     index: "03", sector: "Éducation", context: "Freelance", title: "Biblio UPB — Plateforme universitaire",
+    purpose: "Les étudiants retrouvent leurs documents, notes et informations de scolarité ; les professeurs publient leurs cours ; l’administration gère le tout.",
     description: "Plateforme multi-rôles pour l’Université Polytechnique de Bingerville : documents, scolarité, notes et transport.",
     keyValue: "10", keyLabel: "modules métiers NestJS, servis à 3 espaces : administration, étudiants et professeurs",
     tasks: [
@@ -104,6 +108,7 @@ const FEATURED: Featured[] = [
   },
   {
     index: "04", sector: "Flotte · Maintenance", context: "Professionnel", title: "Maintenance Pro — SATE",
+    purpose: "Chaque panne d’un véhicule est signalée, assignée à un technicien et suivie jusqu’à sa résolution, site par site.",
     description: "Gestion de la maintenance d’une flotte de véhicules, avec rôles administrateur et responsable de site.",
     keyValue: "6", keyLabel: "spécialités de techniciens suivies ; interventions tracées de la panne à la résolution",
     tasks: [
@@ -139,13 +144,14 @@ export function Projects() {
                 </div>
                 <h3 className="card-title">{p.title}</h3>
                 <p className="card-desc">{p.description}</p>
+                <p className="impact" style={{ marginTop: -6 }}><b>À quoi il sert —</b> {p.purpose}</p>
                 <div className="kf"><span className="kf-v">{p.keyValue}</span><span className="kf-l">{p.keyLabel}</span></div>
                 <ul className="bul">
                   {p.tasks.map((t) => (
                     <li key={t}>{t}</li>
                   ))}
                 </ul>
-                <p className="impact"><b>Impact —</b> {p.impact}</p>
+                <p className="impact"><b>Pourquoi c&rsquo;est important —</b> {p.impact}</p>
                 <ul className="chips" style={{ margin: 0, padding: 0, listStyle: "none" }} aria-label="Technologies">
                   {p.stack.map((s) => (
                     <li key={s} className="chip-s">{s}</li>
