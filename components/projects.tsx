@@ -35,11 +35,11 @@ const analytics = (
   </div>
 );
 
-const sync = (
+const saas = (
   <div className="screen mono" aria-hidden="true">
-    <div className="screen-h"><span>boutique · multi-sites</span><span className="live"><i />synchronisé</span></div>
+    <div className="screen-h"><span>SaaS · 11 métiers</span><span className="live"><i />hors ligne ok</span></div>
     <div className="sync">
-      <span className="node">Caisse</span><span className="wire" /><span className="node">Stock</span><span className="wire d2" /><span className="node">Vitrine</span>
+      <span className="node">Caisse</span><span className="wire" /><span className="node">Stock</span><span className="wire d2" /><span className="node">Bilan du soir</span>
     </div>
   </div>
 );
@@ -82,18 +82,18 @@ const FEATURED: Featured[] = [
     url: "https://admin-erp.turbodeliveryapp.com/analystics", screen: analytics,
   },
   {
-    index: "02", sector: "Commerce", context: "Freelance", title: "Dri Valé — Gestion boutique", image: "/assets/image/drivale_logo.jpeg", fit: "contain",
-    purpose: "Le commerçant encaisse en caisse, voit son stock en temps réel dans ses deux boutiques et présente ses vêtements aux clients sur un site en ligne.",
-    description: "Système complet pour une boutique de vêtements à Yopougon : caisse, stock, entrées/sorties et vitrine en ligne.",
-    keyValue: "3 en 1", keyLabel: "caisse, stock en temps réel et vitrine en ligne réunis sur une seule plateforme",
+    index: "02", sector: "Commerce · SaaS", context: "Freelance", title: "Mon Djossi — Caisse et stock", image: "/assets/image/mon-djossi.png", fit: "contain",
+    purpose: "Une boutique, un restaurant ou une quincaillerie s’inscrit en ligne, ajoute ses produits et ses caissiers, puis vend depuis un téléphone, même quand internet coupe.",
+    description: "SaaS multi-boutiques pour les commerces de Côte d’Ivoire : caisse, stock, rapports et abonnements payés par Mobile Money. Évolution multi-métiers de Dri Valé.",
+    keyValue: "11", keyLabel: "types de commerce, chacun avec son vocabulaire et ses outils : fiches techniques, devis et crédit, balles de friperie",
     tasks: [
-      "Back-end NestJS en CQRS avec Prisma et PostgreSQL : produits, variantes, stock, caisse, rapports",
-      "Back-office multi-boutiques : caisse, stock, promotions et journal d’activité",
-      "Vitrine Next.js (catalogue, lookbook) et médias produits via Cloudinary",
+      "Caisse hors connexion : ventes gardées sur le téléphone, envoyées sans doublon au retour du réseau",
+      "Multi-boutiques : abonnements (essai, Mobile Money), espaces Super Admin, admin et caissier",
+      "Codes-barres (caméra ou lecteur), import du catalogue Excel, reçus 80 mm et bilan du jour",
     ],
-    impact: "une seule plateforme pour vendre, suivre le stock et présenter la marque en ligne.",
-    stack: ["NestJS", "Next.js", "Prisma", "PostgreSQL", "CQRS"],
-    url: "https://dri-vale.online", screen: sync,
+    impact: "le commerçant sait chaque soir ce que sa boutique a gagné, même avec un réseau instable.",
+    stack: ["Next.js", "NestJS", "TanStack Query", "Socket.io", "PWA"],
+    url: "https://www.mon-djossi.shop", screen: saas,
   },
   {
     index: "03", sector: "Éducation", context: "Freelance", title: "Biblio UPB — Plateforme universitaire", image: "/assets/image/biblio.png", fit: "contain",
