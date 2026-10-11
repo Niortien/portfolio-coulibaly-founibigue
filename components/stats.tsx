@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 
 const STATS = [
-  { value: 21, suffix: "", label: "projets livrés — gestion, back-offices et plateformes web" },
-  { value: 17, suffix: "", label: "applications consultables en ligne" },
+  { value: 22, suffix: "", label: "projets livrés — gestion, back-offices et plateformes web" },
+  { value: 18, suffix: "", label: "applications consultables en ligne" },
   { value: 2, suffix: "ans", label: "d’expérience professionnelle en entreprise" },
   { value: 90, suffix: "+", label: "score Lighthouse — sites Lunion-Lab et Luxury Home Abidjan" },
 ];
