@@ -1,135 +1,74 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { FadeUp, MaskReveal, Marquee } from "@/components/motion";
+import { skillCategories } from "@/lib/portfolio-data";
 
-const levelToPercent: Record<string, number> = {
-  Expert: 95,
-  Avancé: 80,
-  Intermédiaire: 55,
-  Débutant: 30,
-  "En cours": 25,
-};
+const allSkills = skillCategories.flatMap((c) => c.skills.map((s) => s.name));
 
-const skillCategories = [
-  {
-    title: "Frontend",
-    code: "FE",
-    skills: [
-      { name: "React.js", level: "Avancé" },
-      { name: "Next.js", level: "Avancé" },
-      { name: "Tailwind CSS", level: "Avancé" },
-      { name: "HTML/CSS", level: "Expert" },
-      { name: "JavaScript", level: "Avancé" },
-      { name: "TypeScript", level: "Intermédiaire" },
-    ],
-  },
-  {
-    title: "Backend",
-    code: "BE",
-    skills: [
-      { name: "Node.js", level: "Avancé" },
-      { name: "Express.js", level: "Avancé" },
-      { name: "Nest.js", level: "Intermédiaire" },
-      { name: "Java", level: "Intermédiaire" },
-      { name: "Python", level: "Intermédiaire" },
-      { name: "WinDev", level: "Intermédiaire" },
-    ],
-  },
-  {
-    title: "Base de données",
-    code: "DB",
-    skills: [
-      { name: "MongoDB", level: "Avancé" },
-      { name: "SQL", level: "Avancé" },
-      { name: "MERISE", level: "Intermédiaire" },
-      { name: "UML", level: "Avancé" },
-      { name: "TypeORM", level: "Avancé" },
-      { name: "Prisma", level: "Avancé" },
-    ],
-  },
-  {
-    title: "Mobile & Outils",
-    code: "OPS",
-    skills: [
-      { name: "Flutter", level: "Intermédiaire" },
-      { name: "Dart", level: "Intermédiaire" },
-      { name: "Git", level: "Avancé" },
-      { name: "API REST", level: "Avancé" },
-      { name: "Docker", level: "Débutant" },
-    ],
-  },
-];
-
-const SkillBar = ({ name, level }: { name: string; level: string }) => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const pct = levelToPercent[level] ?? 40;
-
+/** Une bande par famille : les pastilles défilent, une ligne sur deux en sens inverse. */
+function CategoryBand({ title, code, skills, reverse }: { title: string; code: string; skills: string[]; reverse: boolean }) {
+  // Assez d'éléments pour remplir la largeur d'un grand écran avant la boucle
+  const items = skills.length < 6 ? [...skills, ...skills] : skills;
   return (
-    <div ref={ref} className="mb-4 last:mb-0">
-      <div className="flex items-center justify-between mb-1.5">
-        <span className="text-sm text-foreground/90">{name}</span>
-        <span className="eyebrow">{level}</span>
-      </div>
-      <div className="h-[3px] w-full bg-muted overflow-hidden">
-        <motion.div
-          className="h-full bg-primary"
-          initial={{ width: 0 }}
-          animate={{ width: inView ? `${pct}%` : 0 }}
-          transition={{ duration: 0.9, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-        />
-      </div>
+    <div className="grid items-center gap-3 border-t border-ink-foreground/10 py-5 md:grid-cols-[13rem_1fr] md:gap-8">
+      <p className="px-5 text-xs font-semibold uppercase tracking-[0.2em] text-ink-foreground/50 sm:px-10 md:pr-0">
+        {code} · {title}
+      </p>
+      <Marquee speed={26 + skills.length * 2} reverse={reverse} className="[mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+        {items.map((s, i) => (
+          <span
+            key={`${s}-${i}`}
+            className="mx-2 inline-flex items-center gap-3 rounded-full border border-ink-foreground/20 px-5 py-2.5 text-base font-semibold text-ink-foreground sm:text-lg"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+            {s}
+          </span>
+        ))}
+      </Marquee>
     </div>
   );
-};
+}
 
-export const Skills = () => {
-  const titleRef = useRef(null);
-  const titleInView = useInView(titleRef, { once: true, margin: "-80px" });
-
-  return (
-    <section id="skills" className="py-20 lg:py-28 px-4 border-y border-border bg-secondary/20">
-      <div className="container mx-auto">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            ref={titleRef}
-            className="mb-14 lg:mb-16 max-w-2xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={titleInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="eyebrow">04 — Compétences</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold mt-3 mb-4">
-              Stack technique
-            </h2>
-            <p className="text-base lg:text-lg text-muted-foreground">
-              Technologies et outils utilisés au quotidien pour concevoir et livrer des applications.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
-            {skillCategories.map((category, index) => (
-              <motion.div
-                key={index}
-                className="dossier-card p-6 lg:p-7"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.45, delay: index * 0.08 }}
-              >
-                <div className="flex items-center justify-between mb-6 pb-4 border-b border-border">
-                  <h3 className="text-lg font-display font-semibold">{category.title}</h3>
-                  <span className="font-mono text-xs text-muted-foreground">{category.code}</span>
-                </div>
-                {category.skills.map((skill, idx) => (
-                  <SkillBar key={idx} name={skill.name} level={skill.level} />
-                ))}
-              </motion.div>
-            ))}
-          </div>
-        </div>
+/** Ma stack : titres géants qui défilent, puis une bande animée par famille, sans notes. */
+export const Skills = () => (
+  <section id="skills" className="overflow-hidden bg-ink pb-20 pt-24 text-ink-foreground sm:pb-28 sm:pt-32">
+    <div className="mx-auto max-w-6xl px-5 sm:px-10">
+      <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <h2 className="display-xl text-[clamp(3.5rem,10vw,8.5rem)]">
+          <MaskReveal lines={["Ma stack"]} />
+        </h2>
+        <FadeUp>
+          <p className="max-w-sm text-base leading-relaxed text-ink-foreground/70">
+            Les outils avec lesquels je conçois, code et mets en ligne des applications, du schéma de base de données jusqu&apos;à
+            l&apos;écran du client.
+          </p>
+        </FadeUp>
       </div>
-    </section>
-  );
-};
+    </div>
+
+    {/* Deux grandes lignes de noms, en plein et en contour, qui se croisent */}
+    <div className="mt-14 space-y-4 select-none">
+      <Marquee speed={60}>
+        {allSkills.map((s) => (
+          <span key={s} className="display-xl px-5 text-6xl sm:text-8xl">
+            {s} <span className="text-accent">✦</span>
+          </span>
+        ))}
+      </Marquee>
+      <Marquee speed={70} reverse>
+        {allSkills.map((s) => (
+          <span key={s} className="display-xl px-5 text-6xl text-transparent [-webkit-text-stroke:1px_var(--ink-foreground)] sm:text-8xl">
+            {s} <span className="text-ink-muted [-webkit-text-stroke:0]">✦</span>
+          </span>
+        ))}
+      </Marquee>
+    </div>
+
+    <div className="mt-16 border-b border-ink-foreground/10">
+      {skillCategories.map((cat, i) => (
+        <CategoryBand key={cat.title} title={cat.title} code={cat.code} skills={cat.skills.map((s) => s.name)} reverse={i % 2 === 1} />
+      ))}
+    </div>
+    <p className="sr-only">Compétences : {allSkills.join(", ")}.</p>
+  </section>
+);

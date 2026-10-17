@@ -1,153 +1,138 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { useRef } from "react";
-import { Badge } from "@/components/ui/badge";
-import { MapPin, ExternalLink } from "lucide-react";
+import { FadeUp, MaskReveal, useSafeReducedMotion } from "@/components/motion";
+import { experiences } from "@/lib/portfolio-data";
 
-const experiences = [
-  {
-    company: "Lunion-Lab",
-    role: "Développeur Full-Stack",
-    location: "Abidjan, Cocody",
-    duration: "CDI",
-    period: "Août 2024 — Aujourd'hui",
-    tasks: [
-      "Développement d'APIs REST robustes avec Nest.js pour la gestion des données de multiples modules métiers",
-      "Réalisation du site officiel de l'entreprise avec Next.js et React.js, optimisé SEO (score Lighthouse > 90)",
-      "Configuration et intégration de TPE (Terminal de Paiement Électronique) pour les transactions en ligne",
-      "Développement et maintenance de 9+ applications web professionnelles pour des clients aux secteurs variés",
-      "Modélisation de bases de données PostgreSQL et MongoDB selon les contraintes et besoins métiers",
-      "Travail en équipe avec Git, participation aux code reviews et déploiement continu sur Vercel",
-    ],
-    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "API REST", "MongoDB", "Express.js"],
-    projects: [
-      { name: "Turbo ERP", description: "Système de gestion intégré pour les entreprises", link: "https://admin-erp.turbodeliveryapp.com/analystics" },
-      { name: "Turbo Finance", description: "Application de gestion financière et comptabilité", link: "#" },
-      { name: "Chicken-Nation", description: "Site officiel et gestion des commandes", link: "https://www.chicken-nation.com/fr" },
-      { name: "Lunion-Lab Website", description: "Site officiel de Lunion-Lab", link: "https://www.lunion-lab.com/" },
-      { name: "Sidi Immobilier", description: "Plateforme immobilière pour Sidi Immobilier", link: "https://sidi.lunion-lab.com/fr" },
-      { name: "Luxury Home Abidjan", description: "Site immobilier pour les logements de luxe", link: "https://luxuryhomeabidjan.com/" },
-      { name: "Catholikia", description: "Application pour la communauté catholique", link: "https://catholikia.com/fr" },
-      { name: "OSA FC", description: "Site officiel du club de football OSA FC", link: "https://osa-website-alpha.vercel.app/" },
-      { name: "Paroisse St Sauveur", description: "Back-office de gestion paroissiale", link: "https://paroisse-st-sauveur-mis-ricordieux.vercel.app/" },
-      { name: "Meet Lunion", description: "Plateforme de visioconférence interne de Lunion-Lab", link: "https://meet.lunion-lab.com/" },
-    ],
-  },
-  {
-    company: "Siège de la SOTRA",
-    role: "Stage Développeur Web",
-    location: "Abidjan, Vridi",
-    duration: "4 mois",
-    period: "2024 — 2025",
-    tasks: [
-      "Installation de l'infrastructure réseau et fibre optique pour les caméras de surveillance du PCA",
-      "Analyse des besoins métiers et conception d'une application de gestion avec la méthode MERISE (MCD, MLD, MPD)",
-      "Développement de l'application de gestion interne avec WinDev et base de données SQL",
-      "Tests fonctionnels, documentation technique et formation des utilisateurs sur le système développé",
-    ],
-    technologies: ["WinDev", "MERISE", "SQL"],
-    projects: [
-      { name: "Application de gestion SOTRA", description: "Système de gestion interne avec base de données", link: "#" },
-    ],
-  },
-];
+type Experience = (typeof experiences)[number];
 
-export const Experience = () => {
-  const titleRef = useRef(null);
-  const titleInView = useInView(titleRef, { once: true, margin: "-80px" });
-
+/** Une étape de la frise : tout est visible d'un coup d'œil, rien à déplier. */
+function Step({ exp, index }: { exp: Experience; index: number }) {
+  const current = exp.period.includes("Aujourd'hui");
+  const [start, end] = exp.period.split(" — ");
   return (
-    <section id="experience" className="py-20 lg:py-28 px-4">
-      <div className="container mx-auto">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            ref={titleRef}
-            className="mb-14 lg:mb-20"
-            initial={{ opacity: 0, y: 20 }}
-            animate={titleInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="eyebrow">02 — Parcours</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold mt-3">
-              Expérience professionnelle
-            </h2>
-            <p className="text-base lg:text-lg text-muted-foreground mt-4 max-w-2xl">
-              Développeur depuis 2022, avec une expérience professionnelle construite à travers stages et poste actuel en CDI chez Lunion-Lab.
-            </p>
-          </motion.div>
+    <li className="relative grid gap-6 pb-16 pl-10 md:grid-cols-[13rem_1fr] md:gap-12 md:pl-0">
+      {/* Repère sur la ligne (au milieu de l'espace entre date et carte) */}
+      <span
+        className="absolute left-0 top-1.5 grid h-[1.125rem] w-[1.125rem] -translate-x-1/2 place-items-center rounded-full border-2 border-foreground bg-paper md:left-[14.5rem]"
+        aria-hidden="true"
+      >
+        {current && <span className="h-2 w-2 animate-pulse rounded-full bg-live" />}
+      </span>
 
-          <div className="space-y-14">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-6 md:gap-10">
-                  {/* Period column */}
-                  <div className="flex md:flex-col md:items-start items-center gap-3 md:gap-1">
-                    <span className="font-mono text-sm text-foreground/90">{exp.period}</span>
-                    <span className="text-xs text-muted-foreground font-body">{exp.duration}</span>
-                  </div>
+      <FadeUp className="md:text-right">
+        <p className="display-xl text-5xl sm:text-6xl">{start}</p>
+        <p className="mt-1 text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">→ {end}</p>
+        {current && (
+          <span className="mt-3 inline-flex items-center gap-2 rounded-full bg-live/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#15803D] dark:text-live">
+            En poste
+          </span>
+        )}
+      </FadeUp>
 
-                  {/* Content */}
-                  <div className="border-l-2 border-primary/30 pl-6 md:pl-8">
-                    <h3 className="text-xl lg:text-2xl font-display font-semibold text-foreground">{exp.role}</h3>
-                    <div className="flex flex-wrap items-center gap-3 mt-1.5 mb-6">
-                      <span className="text-primary font-medium text-sm">{exp.company}</span>
-                      <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <MapPin className="w-3 h-3" />
-                        {exp.location}
-                      </span>
-                    </div>
+      <FadeUp delay={0.1}>
+        <div className="rounded-2xl bg-card p-6 ring-1 ring-foreground/10 sm:p-8">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                {String(index + 1).padStart(2, "0")} · {exp.location}
+              </p>
+              <h3 className="mt-2 font-body text-3xl font-bold tracking-tight sm:text-4xl">{exp.company}</h3>
+              <p className="mt-1 text-lg font-medium">{exp.role}</p>
+            </div>
+            <span className="rounded-full bg-foreground px-3 py-1 text-xs font-bold uppercase tracking-wide text-background">{exp.duration}</span>
+          </div>
 
-                    <ul className="space-y-2 mb-6">
-                      {exp.tasks.map((task, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed">
-                          <span className="mt-2 w-1 h-1 rounded-full bg-muted-foreground shrink-0" />
-                          {task}
-                        </li>
-                      ))}
-                    </ul>
+          <ul className="mt-6 space-y-3 text-[15px] leading-relaxed text-foreground/85">
+            {exp.tasks.map((t) => (
+              <li key={t} className="flex gap-3">
+                <span className="mt-[0.6rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                {t}
+              </li>
+            ))}
+          </ul>
 
-                    {exp.projects && exp.projects.length > 0 && (
-                      <div className="mb-6">
-                        <span className="eyebrow block mb-3">Projets réalisés</span>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
-                          {exp.projects.map((project, idx) => (
-                            <a
-                              key={idx}
-                              href={project.link !== "#" ? project.link : undefined}
-                              target={project.link !== "#" ? "_blank" : undefined}
-                              rel="noopener noreferrer"
-                              className={`flex items-center justify-between gap-2 py-1.5 border-b border-border/70 text-sm ${project.link !== "#" ? "hover:border-primary/50 cursor-pointer group" : ""}`}
-                            >
-                              <span className="text-foreground/85 group-hover:text-primary transition-colors">{project.name}</span>
-                              {project.link !== "#" && (
-                                <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
-                              )}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="flex flex-wrap gap-2">
-                      {exp.technologies.map((tech, idx) => (
-                        <Badge key={idx} variant="outline">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {exp.technologies.map((t) => (
+              <span key={t} className="rounded-full border border-foreground/20 px-3 py-1 text-xs font-semibold">
+                {t}
+              </span>
             ))}
           </div>
+
+          <div className="mt-7 border-t border-foreground/10 pt-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Projets livrés ({exp.projects.length})</p>
+            <ul className="mt-3 flex flex-wrap gap-2">
+              {exp.projects.map((p) =>
+                p.link && p.link !== "#" ? (
+                  <li key={p.name}>
+                    <a
+                      href={p.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={p.description}
+                      className="inline-flex items-center gap-1 rounded-full bg-background px-3 py-1.5 text-xs font-semibold ring-1 ring-foreground/10 transition-colors hover:bg-foreground hover:text-background"
+                    >
+                      {p.name} <span aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                ) : (
+                  <li key={p.name} title={p.description} className="rounded-full bg-background px-3 py-1.5 text-xs font-semibold ring-1 ring-foreground/10">
+                    {p.name}
+                  </li>
+                ),
+              )}
+            </ul>
+          </div>
         </div>
+      </FadeUp>
+    </li>
+  );
+}
+
+/** Parcours professionnel en frise verticale : la ligne se trace au défilement. */
+export const Experience = () => {
+  const listRef = useRef<HTMLOListElement>(null);
+  const reduce = useSafeReducedMotion();
+  const { scrollYProgress } = useScroll({ target: listRef, offset: ["start 75%", "end 60%"] });
+  const line = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
+
+  return (
+    <section id="experience" className="bg-paper px-5 py-24 sm:px-10 sm:py-32">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-8 lg:grid-cols-[1fr_minmax(0,22rem)] lg:items-end">
+          <div>
+            <p className="flex items-center gap-2 text-sm font-medium">
+              <span className="h-2 w-2 rounded-full bg-foreground" /> Parcours professionnel · 02 / 04
+            </p>
+            <h2 className="display-xl mt-4 text-[clamp(2.75rem,6.5vw,6.5rem)] leading-[1]">
+              <MaskReveal lines={["Mon parcours,", "étape par étape"]} />
+            </h2>
+          </div>
+          <FadeUp>
+            <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+              Un stage à la SOTRA, puis LUNION-LAB, où je développe en équipe des applications utilisées chaque jour par des clients
+              de secteurs très différents.
+            </p>
+            <a href="#contact" className="ink-link mt-4 inline-block font-semibold">
+              Discutons de votre projet ↗
+            </a>
+          </FadeUp>
+        </div>
+
+        <ol ref={listRef} className="relative mt-20">
+          {/* Ligne de fond, puis ligne pleine qui avance avec le défilement */}
+          <span className="absolute bottom-16 left-0 top-2 w-px bg-foreground/15 md:left-[14.5rem]" aria-hidden="true" />
+          <motion.span
+            className="absolute bottom-16 left-0 top-2 w-px origin-top bg-foreground md:left-[14.5rem]"
+            style={reduce ? undefined : { scaleY: line }}
+            aria-hidden="true"
+          />
+          {experiences.map((exp, i) => (
+            <Step key={exp.company} exp={exp} index={i} />
+          ))}
+        </ol>
       </div>
     </section>
   );

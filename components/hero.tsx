@@ -1,158 +1,144 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Mail, MapPin, Phone, ArrowRight, Github } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import { useRef } from "react";
+import { useIntroDone } from "@/components/intro";
+import { EASE_OUT, Marquee, useSafeReducedMotion } from "@/components/motion";
 
-const statusRows = [
-  { label: "Statut", value: "Disponible pour de nouvelles missions" },
-  { label: "Basé à", value: "Abidjan, Côte d'Ivoire" },
-  { label: "Développeur depuis", value: "2022" },
-  { label: "Stack principale", value: "Next.js · Nest.js · PostgreSQL" },
-  { label: "Livré", value: "9+ applications en production" },
-];
-
+/** Hero « nom géant derrière le portrait » : le nom défile, la photo détourée passe devant. */
 export const Hero = () => {
+  const ref = useRef<HTMLElement>(null);
+  const ready = useIntroDone();
+  const reduce = useSafeReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const photoY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
+  const nameY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const show = ready || reduce;
+
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center pt-28 pb-20 px-4 relative overflow-hidden"
+      ref={ref}
+      className="relative flex h-[100svh] min-h-[620px] items-end overflow-hidden bg-paper"
+      aria-label="Présentation"
     >
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-16 lg:gap-14 items-start max-w-6xl mx-auto">
+      {/* Cercles fins qui tournent lentement */}
+      <motion.svg
+        className="pointer-events-none absolute -left-40 -top-40 h-[640px] w-[640px] text-foreground/25"
+        viewBox="0 0 100 100"
+        aria-hidden="true"
+        initial={{ opacity: 0 }}
+        animate={show ? { opacity: 1, rotate: reduce ? 0 : 360 } : undefined}
+        transition={{ opacity: { duration: 1 }, rotate: { duration: 90, ease: "linear", repeat: Infinity } }}
+      >
+        <circle cx="50" cy="50" r="49.6" fill="none" stroke="currentColor" strokeWidth="0.15" strokeDasharray="0.6 1.4" />
+      </motion.svg>
+      <motion.svg
+        className="pointer-events-none absolute -bottom-56 -right-48 h-[560px] w-[560px] text-foreground/25"
+        viewBox="0 0 100 100"
+        aria-hidden="true"
+        initial={{ opacity: 0 }}
+        animate={show ? { opacity: 1, rotate: reduce ? 0 : -360 } : undefined}
+        transition={{ opacity: { duration: 1, delay: 0.2 }, rotate: { duration: 110, ease: "linear", repeat: Infinity } }}
+      >
+        <circle cx="50" cy="50" r="49.6" fill="none" stroke="currentColor" strokeWidth="0.15" />
+      </motion.svg>
 
-          {/* ── LEFT COLUMN ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+      {/* Le nom géant, derrière la photo */}
+      <motion.div className="absolute inset-x-0 top-[30%] sm:top-[24%]" style={{ y: reduce ? undefined : nameY }}>
+        <motion.div
+          initial={{ x: "35%", opacity: 0 }}
+          animate={show ? { x: "0%", opacity: 1 } : undefined}
+          transition={{ duration: 1.4, ease: EASE_OUT }}
+        >
+          <Marquee speed={38}>
+            <span className="display-xl px-[0.15em] pt-[0.16em] text-[clamp(7rem,26vw,24rem)] text-foreground">
+              Coulibaly Founibigué Issa Niortien<span aria-hidden="true" className="mx-[0.12em] inline-block h-[0.14em] w-[0.14em] translate-y-[-0.1em] rounded-full bg-current align-middle opacity-25" />
+            </span>
+          </Marquee>
+        </motion.div>
+      </motion.div>
+
+      {/* Libellé haut gauche */}
+      <motion.div
+        className="absolute left-5 top-24 z-20 sm:left-10 sm:top-32"
+        initial={{ opacity: 0, y: 16 }}
+        animate={show ? { opacity: 1, y: 0 } : undefined}
+        transition={{ duration: 0.8, ease: EASE_OUT, delay: 0.5 }}
+      >
+        <p className="text-base font-medium leading-snug sm:text-xl">
+          Développeur
+          <br />
+          Full-Stack · Next.js &amp; NestJS
+        </p>
+        <p className="mt-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-live opacity-70 motion-reduce:hidden" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-live" />
+          </span>
+          Disponible
+        </p>
+      </motion.div>
+
+      {/* La photo détourée, devant le nom */}
+      <motion.div
+        className="relative z-10 mx-auto h-[78svh] w-full max-w-[560px] sm:h-[86svh]"
+        style={{ y: reduce ? undefined : photoY }}
+      >
+        <motion.div
+          className="relative h-full w-full"
+          initial={{ y: 80, opacity: 0 }}
+          animate={show ? { y: 0, opacity: 1 } : undefined}
+          transition={{ duration: 1.2, ease: EASE_OUT, delay: 0.15 }}
+        >
+          <Image
+            src="/assets/image/ma_photo_detouree.webp"
+            alt="Coulibaly Founibigué Issa Niortien, développeur full-stack"
+            fill
+            priority
+            sizes="(max-width: 640px) 100vw, 560px"
+            className="object-contain object-bottom"
+          />
+        </motion.div>
+      </motion.div>
+
+      {/* Bas : lieu et invitation à défiler */}
+      <motion.div
+        className="absolute inset-x-5 bottom-6 z-20 flex items-end justify-between sm:inset-x-10 sm:bottom-10"
+        style={{ opacity: reduce ? 1 : fade }}
+      >
+        <motion.p
+          className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground"
+          initial={{ opacity: 0 }}
+          animate={show ? { opacity: 1 } : undefined}
+          transition={{ delay: 0.9 }}
+        >
+          Abidjan · Côte d&apos;Ivoire
+        </motion.p>
+        <motion.a
+          href="#about"
+          className="flex flex-col items-center gap-2 text-sm font-medium sm:text-lg"
+          initial={{ opacity: 0 }}
+          animate={show ? { opacity: 1 } : undefined}
+          transition={{ delay: 1 }}
+        >
+          Défiler
+          <motion.svg
+            viewBox="0 0 24 40"
+            className="h-9 w-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            animate={reduce ? undefined : { y: [0, 6, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            aria-hidden="true"
           >
-            <motion.div
-              className="flex items-center gap-2.5 mb-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.1 }}
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-              </span>
-              <span className="eyebrow">Développeur Full-Stack — Dossier professionnel</span>
-            </motion.div>
-
-            <motion.h1
-              className="text-5xl sm:text-6xl lg:text-7xl font-display font-semibold mb-6 leading-[0.98] tracking-tight"
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15, duration: 0.5 }}
-            >
-              Coulibaly
-              <br />
-              <span className="text-primary">Founibigue Issa</span>
-            </motion.h1>
-
-            <motion.p
-              className="text-base sm:text-lg text-muted-foreground mb-10 max-w-xl leading-relaxed"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25 }}
-            >
-              Je conçois et livre des systèmes de gestion, back-offices et plateformes web pour de
-              vraies entreprises — ERP, caisses, back-offices immobiliers, associatifs et
-              universitaires. Développeur Full-Stack chez <span className="text-foreground font-medium">Lunion-Lab</span>,
-              où j&apos;ai livré <span className="text-foreground font-medium">9+ applications</span> en
-              production sur le stack <span className="text-foreground font-medium">Next.js / Nest.js / PostgreSQL</span>.
-            </motion.p>
-
-            {/* Status readout — signature panel */}
-            <motion.div
-              className="border border-border mb-10 max-w-xl"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              {statusRows.map((row, i) => (
-                <div
-                  key={row.label}
-                  className={`flex items-baseline justify-between gap-4 px-4 py-3 ${i !== statusRows.length - 1 ? "border-b border-border" : ""}`}
-                >
-                  <span className="eyebrow shrink-0">{row.label}</span>
-                  <span className="text-sm font-body text-right text-foreground/90">{row.value}</span>
-                </div>
-              ))}
-            </motion.div>
-
-            <motion.div
-              className="flex flex-wrap gap-3 mb-9"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35 }}
-            >
-              <a href="mailto:niortiencoulibaly2001@gmail.com">
-                <Button size="lg" className="gap-2">
-                  <Mail className="w-4 h-4" />
-                  Me contacter
-                </Button>
-              </a>
-              <a href="#projects">
-                <Button size="lg" variant="outline" className="gap-2 group">
-                  Voir mes projets
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </a>
-            </motion.div>
-
-            <motion.div
-              className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground font-body"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.45 }}
-            >
-              <span className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5" />
-                Cocody Faya, Abidjan
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Phone className="w-3.5 h-3.5" />
-                +225 07 67 54 35 71
-              </span>
-              <a href="https://github.com/Niortien" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 ink-link hover:text-foreground transition-colors">
-                <Github className="w-3.5 h-3.5" />
-                github.com/Niortien
-              </a>
-            </motion.div>
-          </motion.div>
-
-          {/* ── RIGHT COLUMN — Photo ── */}
-          <motion.div
-            className="flex justify-center lg:justify-end lg:pt-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <div className="w-full max-w-[300px]">
-              <div className="register-mark p-3">
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
-                  <Image
-                    src="/assets/image/ma_photo.jpeg"
-                    alt="Coulibaly Founibigue Issa"
-                    fill
-                    sizes="300px"
-                    className="object-cover grayscale-[15%]"
-                    priority
-                  />
-                </div>
-              </div>
-              <div className="flex items-center justify-between px-1 mt-3">
-                <span className="eyebrow">Réf. CI-DEV-01</span>
-                <span className="eyebrow">Abidjan, 2026</span>
-              </div>
-            </div>
-          </motion.div>
-
-        </div>
-      </div>
+            <path d="M12 2v34M3 27l9 9 9-9" />
+          </motion.svg>
+        </motion.a>
+      </motion.div>
     </section>
   );
 };

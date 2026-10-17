@@ -1,506 +1,227 @@
 "use client";
 
-import { motion, useInView, type Variants } from "framer-motion";
-import { useRef } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Github, ArrowUpRight } from "lucide-react";
+import { AnimatePresence, motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import Image from "next/image";
+import { useRef, useState } from "react";
+import { EASE_OUT, FadeUp, MaskReveal, RotatingBadge, useMediaQuery, useSafeReducedMotion } from "@/components/motion";
+import { projects } from "@/lib/portfolio-data";
+import { cn } from "@/lib/utils";
 
-const projects = [
-  {
-    code: "ERP",
-    title: "Turbo ERP",
-    description: "Système de gestion intégré (ERP) pour les entreprises. Centralise les opérations, ressources humaines et processus métiers en une seule plateforme.",
-    tasks: [
-      "Développement de modules ERP : RH, finances, logistique et reporting analytique",
-      "Conception d'APIs REST robustes avec Nest.js et PostgreSQL",
-      "Intégration d'un tableau de bord analytique avec visualisation de données en temps réel",
-    ],
-    impact: "Centralisation des données entreprise et réduction du temps de traitement des opérations internes",
-    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "API REST", "MongoDB"],
-    image: "/assets/image/turbo.png",
-    link: "https://admin-erp.turbodeliveryapp.com/analystics",
-    github: "#",
-    type: "Professionnel",
-    accent: "#24365E",
-  },
-  {
-    code: "FINANCE",
-    title: "Turbo Finance",
-    description: "Application de gestion financière et comptabilité d'entreprise. Module financier intégré avec suivi des transactions et rapports comptables.",
-    tasks: [
-      "Développement des modules de comptabilité et suivi des transactions financières",
-      "Création de tableaux de bord financiers avec indicateurs clés (KPIs)",
-      "Intégration avec le système ERP principal via des APIs sécurisées",
-    ],
-    impact: "Traçabilité complète des flux financiers et automatisation des rapports comptables",
-    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "API REST"],
-    image: "/assets/image/turbo.png",
-    link: "https://admin-erp.turbodeliveryapp.com/analystics",
-    github: "#",
-    type: "Professionnel",
-    accent: "#1F6E5C",
-  },
-  {
-    code: "RESTAURATION",
-    title: "Chicken-Nation",
-    description: "Site officiel et application web de gestion de commandes pour la chaîne de restauration rapide Chicken-Nation.",
-    tasks: [
-      "Développement du site vitrine et du système de commande en ligne",
-      "Création d'un back-office de gestion des commandes en temps réel",
-      "Optimisation UI/UX et responsive design pour mobile et desktop",
-    ],
-    impact: "Digitalisation complète du processus de commande et amélioration de l'expérience client en ligne",
-    technologies: ["Next.js", "React.js", "Nest.js", "PostgreSQL", "API REST"],
-    image: "/assets/image/logo_chiken.png",
-    link: "https://www.chicken-nation.com/fr",
-    github: "#",
-    type: "Professionnel",
-    accent: "#B54B1F",
-  },
-  {
-    code: "IMMOBILIER",
-    title: "Sidi Immobilier",
-    description: "Plateforme immobilière complète pour Sidi Immobilier. Solution numérique de gestion et de présentation des biens immobiliers.",
-    tasks: [
-      "Développement d'un système de listing et de recherche avancée de biens",
-      "Conception de fiches détaillées avec galeries d'images et formulaires de contact",
-      "Interface d'administration pour la gestion des annonces immobilières",
-    ],
-    impact: "Digitalisation du processus de vente immobilière et réduction des délais de traitement des demandes clients",
-    technologies: ["Next.js", "React.js", "Nest.js", "PostgreSQL", "API REST"],
-    image: "/assets/image/sidi_logo.png",
-    link: "https://sidi.lunion-lab.com/fr",
-    github: "#",
-    type: "Professionnel",
-    accent: "#5B4636",
-  },
-  {
-    code: "IMMOBILIER",
-    title: "Luxury Home Abidjan",
-    description: "Site immobilier haut de gamme pour les logements de luxe à Abidjan. Plateforme élégante dédiée aux biens immobiliers premium.",
-    tasks: [
-      "Design UI/UX haut de gamme avec animations et transitions soignées",
-      "Développement d'un catalogue de propriétés avec filtres et galeries photos",
-      "Optimisation des performances (Lighthouse > 90) et du référencement SEO",
-    ],
-    impact: "Présence digitale premium attirant une clientèle haut de gamme et augmentant les leads qualifiés",
-    technologies: ["Next.js", "React.js", "Nest.js", "PostgreSQL", "API REST"],
-    image: "/assets/image/lhaa_logo.png",
-    link: "https://luxuryhomeabidjan.com/",
-    github: "#",
-    type: "Professionnel",
-    accent: "#8A6D3B",
-  },
-  {
-    code: "VITRINE",
-    title: "Lunion-Lab Website",
-    description: "Site officiel corporate de Lunion-Lab, présentant l'entreprise, ses services et l'ensemble de ses réalisations.",
-    tasks: [
-      "Conception et développement complet du site vitrine de l'entreprise",
-      "Intégration des sections services, portfolio et formulaire de contact",
-      "Optimisation SEO et performance pour une meilleure visibilité en ligne",
-    ],
-    impact: "Renforcement de l'image de marque et augmentation de la visibilité digitale de l'entreprise",
-    technologies: ["Next.js", "React.js", "Tailwind CSS", "TypeScript", "Vercel"],
-    image: "/assets/image/logo_lunion.png",
-    link: "https://www.lunion-lab.com/",
-    github: "#",
-    type: "Professionnel",
-    accent: "#3D4F7D",
-  },
-  {
-    code: "ASSOCIATIF",
-    title: "Catholikia",
-    description: "Application numérique complète pour la communauté catholique. Plateforme centralisant les activités, services et événements paroissiaux.",
-    tasks: [
-      "Développement d'un espace communautaire avec gestion des membres",
-      "Création d'un système de gestion des événements et annonces paroissiales",
-      "Mise en place d'un back-office d'administration complet et intuitif",
-    ],
-    impact: "Digitalisation des services paroissiaux, améliorant la communication et l'engagement communautaire",
-    technologies: ["Next.js", "React.js", "Nest.js", "PostgreSQL", "MongoDB"],
-    image: "/assets/image/catholikia.png",
-    link: "https://catholikia.com/fr",
-    github: "#",
-    type: "Professionnel",
-    accent: "#2C5F7C",
-  },
-  {
-    code: "SPORT",
-    title: "OSA FC",
-    description: "Site officiel du club de football OSA FC. Plateforme sportive moderne présentant le club, les matchs et les actualités.",
-    tasks: [
-      "Développement des sections équipe, actualités et calendrier des matchs",
-      "Design responsive optimisé pour tous les appareils",
-      "Intégration d'un système de gestion des événements et résultats sportifs",
-    ],
-    impact: "Présence digitale officielle renforçant l'image du club et l'engagement des supporters",
-    technologies: ["Next.js", "React.js", "Tailwind CSS", "API REST"],
-    image: "/assets/image/osa_logo.png",
-    link: "https://osa-website-alpha.vercel.app/",
-    github: "#",
-    type: "Professionnel",
-    accent: "#2F6B3A",
-  },
-  {
-    code: "ASSOCIATIF",
-    title: "Paroisse St Sauveur",
-    description: "Back-office de gestion administrative pour la paroisse Saint Sauveur. Système complet de gestion des activités et services paroissiaux.",
-    tasks: [
-      "Développement d'un système de gestion des membres et groupes paroissiaux",
-      "Création de modules de suivi des activités et événements",
-      "Interface intuitive adaptée au personnel non-technique",
-    ],
-    impact: "Automatisation de la gestion administrative, réduisant significativement la charge de travail du personnel",
-    technologies: ["Next.js", "React.js", "Nest.js", "PostgreSQL", "Back-office"],
-    image: "/assets/image/logo-paroise.png",
-    link: "https://paroisse-st-sauveur-mis-ricordieux.vercel.app/",
-    github: "#",
-    type: "Professionnel",
-    accent: "#64645C",
-  },
-  {
-    code: "COMMERCE",
-    title: "Dri Valé — Gestion Boutique",
-    description: "Système complet de gestion pour une boutique de vêtements à Yopougon, Abidjan : caisse, stock, entrées/sorties et vitrine en ligne unifiés.",
-    tasks: [
-      "Backend Nest.js (CQRS, Prisma, PostgreSQL) : produits, variantes, stock, caisse, entrées/sorties, boutiques et rapports",
-      "Frontend Next.js avec espace vitrine (catalogue, lookbook, marque) et back-office multi-boutiques (caisse, stock, promotions, activité)",
-      "Intégration Cloudinary pour la gestion des médias produits et génération de rapports",
-    ],
-    impact: "Caisse, stock en temps réel et vitrine en ligne réunis sur une seule plateforme pour la boutique",
-    technologies: ["Nest.js", "Next.js", "Prisma", "PostgreSQL", "CQRS", "TypeScript"],
-    image: "/assets/image/drivale_logo.jpeg",
-    link: "https://dri-vale.online",
-    github: "#",
-    type: "Freelance",
-    accent: "#8A5A34",
-  },
-  {
-    code: "STOCK",
-    title: "Stock-Pro",
-    description: "Application de gestion de stock moderne et intuitive. Solution complète pour le suivi des inventaires et la gestion des produits.",
-    tasks: [
-      "Développement d'un dashboard de suivi des stocks en temps réel",
-      "Création de modules d'entrée/sortie de stock avec historique complet",
-      "Génération de rapports et alertes automatiques de stock minimum",
-    ],
-    impact: "Optimisation de la gestion des inventaires et réduction des ruptures de stock pour les entreprises",
-    technologies: ["Next.js", "React.js", "Vercel", "Dashboard", "Inventaire"],
-    image: "/assets/image/stock.jpg",
-    link: "https://stock-pro-six.vercel.app/stock",
-    github: "#",
-    type: "Freelance",
-    accent: "#3E7A6D",
-  },
-  {
-    code: "ÉDUCATION",
-    title: "Biblio UPB — Plateforme Universitaire",
-    description: "Plateforme numérique complète pour l'Université Polytechnique de Bingerville. Système multi-rôles (Admin, Étudiant, Professeur) couvrant la gestion documentaire, la scolarité, les notes et le transport.",
-    tasks: [
-      "Backend Nest.js avec 10 modules métiers : documents, filières, niveaux, matières, scolarité, transport, notes, professeurs, utilisateurs et authentification JWT",
-      "3 espaces dédiés côté Next.js : dashboard Admin, espace Étudiant et espace Professeur",
-      "Système de gestion documentaire classé par filière, niveau et matière",
-    ],
-    impact: "Centralisation de la vie universitaire, réduisant la charge administrative et améliorant l'accès aux ressources pédagogiques",
-    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "JWT", "TypeScript", "Prisma"],
-    image: "/assets/image/upb.jpg",
-    link: "https://univeriste-polytechnique-de-bingerville.vercel.app/",
-    github: "#",
-    type: "Freelance",
-    accent: "#2E4A7D",
-  },
-  {
-    code: "TRANSPORT",
-    title: "Application SOTRA",
-    description: "Système de gestion interne pour la SOTRA (Société de Transport Abidjanais). Conçu selon la méthode MERISE avec WinDev et SQL.",
-    tasks: [
-      "Analyse des besoins et modélisation avec la méthode MERISE (MCD, MLD, MPD)",
-      "Conception du schéma de base de données SQL normalisé",
-      "Développement de l'application de gestion métier avec WinDev",
-    ],
-    impact: "Digitalisation et optimisation des processus de gestion interne de la SOTRA",
-    technologies: ["WinDev", "SQL", "MERISE"],
-    image: "/assets/image/Logo_sotra_2009.png",
-    link: "#",
-    github: "#",
-    type: "Professionnel",
-    accent: "#5C6169",
-  },
-  {
-    code: "FORMATION",
-    title: "Projets MERN Stack",
-    description: "Ensemble d'applications full-stack développées avec le stack MERN. APIs RESTful et interfaces utilisateur dynamiques.",
-    tasks: [
-      "Développement d'APIs RESTful complètes avec Express.js et Node.js",
-      "Conception d'interfaces utilisateur réactives avec React.js",
-      "Gestion et modélisation des données avec MongoDB",
-    ],
-    impact: "Maîtrise complète du développement full-stack JavaScript end-to-end",
-    technologies: ["MongoDB", "Express.js", "React.js", "Node.js", "JWT"],
-    image: "/assets/image/logo_lunion.png",
-    link: "#",
-    github: "#",
-    type: "Freelance",
-    accent: "#4B6B2C",
-  },
-  {
-    code: "E-COMMERCE",
-    title: "LUXTIME",
-    description: "Application web e-commerce complète avec gestion de produits, panier d'achat et système de paiement intégré.",
-    tasks: [
-      "Conception et développement de l'interface produits et du panier d'achat",
-      "Intégration de passerelles de paiement et gestion des commandes",
-      "Optimisation des performances et du SEO pour maximiser la visibilité",
-    ],
-    impact: "Interface e-commerce moderne améliorant le taux de conversion et l'expérience d'achat en ligne",
-    technologies: ["Next.js", "React", "Tailwind CSS", "API REST"],
-    image: "/assets/image/logo_lunion.png",
-    link: "#",
-    github: "#",
-    type: "Professionnel",
-    accent: "#8C3B5E",
-  },
-  {
-    code: "FLOTTE",
-    title: "Maintenance Pro — SATE",
-    description: "Système complet de gestion de maintenance de flotte de véhicules pour SATE. Application full-stack avec rôles admin et responsable de site, couvrant véhicules, techniciens, interventions et rapports.",
-    tasks: [
-      "Backend Nest.js avec Prisma ORM et PostgreSQL : véhicules, techniciens (6 spécialités), interventions, sites et rapports",
-      "Frontend Next.js multi-rôles (Admin, Responsable de site) avec dashboards de suivi en temps réel",
-      "Suivi complet des interventions : types de pannes, priorités, statuts et temps d'intervention",
-    ],
-    impact: "Réduction des pannes non traitées, traçabilité totale des interventions et optimisation de la disponibilité des véhicules",
-    technologies: ["Nest.js", "Next.js", "React.js", "PostgreSQL", "Prisma", "JWT", "TypeScript"],
-    image: "/assets/image/mainteance.png",
-    link: "https://maintenance-indol.vercel.app/",
-    github: "#",
-    type: "Professionnel",
-    accent: "#1F6E5C",
-  },
-  {
-    code: "HOTELLERIE",
-    title: "Gestion Hôtel",
-    description: "Système de gestion hôtelière complet : chambres, réservations, clients et suivi financier pour un établissement.",
-    tasks: [
-      "Dashboard temps réel et gestion des chambres avec planning de réservations en drag & drop",
-      "Gestion des clients, des dépenses et génération de rapports exportables en PDF",
-      "État global avec Zustand et synchronisation des données via TanStack Query",
-    ],
-    impact: "Centralisation de la gestion des réservations, des chambres et des finances de l'hôtel sur une seule interface",
-    technologies: ["Next.js", "React", "Zustand", "TanStack Query", "React Hook Form", "Zod", "TypeScript"],
-    image: "/assets/image/hotel.png",
-    link: "https://gestion-hotel-delta.vercel.app/dashboard",
-    github: "#",
-    type: "Freelance",
-    accent: "#6B4A9C",
-  },
-  {
-    code: "SECU",
-    title: "Lunion Sécure Parcours",
-    description: "Plateforme de gestion du personnel pour les entreprises de sécurité privée : back-office web, SaaS multi-tenant et application desktop pour le suivi des agents.",
-    tasks: [
-      "Back-office Next.js pour la gestion du personnel, des présences, des demandes et de la messagerie interne",
-      "Version SaaS multi-tenant avec espace public et dashboard protégé (architecture multilingue)",
-      "Application desktop Windows (Flutter) pour la supervision du back-office sur site",
-    ],
-    impact: "Centralisation du suivi des agents de sécurité (présences, demandes, communication) sur une seule plateforme",
-    technologies: ["Next.js", "Nest.js", "Flutter", "TypeScript", "SaaS", "Multi-tenant"],
-    image: "/assets/image/logo_secure.png",
-    link: "#",
-    github: "#",
-    type: "Professionnel",
-    accent: "#7A3B3B",
-  },
-  {
-    code: "EDUCATION",
-    title: "Ephrata",
-    description: "Site vitrine pour un établissement scolaire : présentation des classes, galerie photo et palmarès des résultats.",
-    tasks: [
-      "Développement du site vitrine avec présentation des classes et du programme pédagogique",
-      "Galerie photo interactive et carrousel des événements de l'école",
-      "Section palmarès mettant en avant les résultats et réussites des élèves",
-    ],
-    impact: "Présence digitale moderne pour l'établissement, facilitant l'information aux parents et futurs élèves",
-    technologies: ["Next.js", "React.js", "GSAP", "Framer Motion", "Tailwind CSS"],
-    image: "/assets/image/ephrata_logo.png",
-    link: "https://site-ephrata.vercel.app/",
-    github: "#",
-    type: "Freelance",
-    accent: "#4A6B8C",
-  },
-  {
-    code: "RELIGIEUX",
-    title: "Salam",
-    description: "Site vitrine pour une mosquée : horaires de prière, calendrier islamique et vie communautaire.",
-    tasks: [
-      "Intégration d'une API d'horaires de prière avec mise à jour automatique selon la localisation",
-      "Calendrier islamique, verset et zikr du jour, et section khutbah (sermon)",
-      "Sections communauté et histoire de la mosquée avec formulaire de contact",
-    ],
-    impact: "Accès facilité aux horaires de prière et renforcement du lien communautaire des fidèles",
-    technologies: ["Next.js", "React.js", "API REST", "Tailwind CSS"],
-    image: "/assets/image/salam_logo.png",
-    link: "https://salam-taupe.vercel.app/",
-    github: "#",
-    type: "Freelance",
-    accent: "#6B8C4A",
-  },
-  {
-    code: "HOTELLERIE",
-    title: "Hôtel Poro — Korhogo",
-    description: "Site vitrine et réservation en ligne pour l'Hôtel Poro à Korhogo, au cœur de la culture Sénoufo, cité créative UNESCO 2025.",
-    tasks: [
-      "Présentation des chambres (standard, supérieure, suite) avec galeries photos",
-      "Système de réservation en ligne et présentation de l'histoire de l'hôtel et de la région",
-      "Interface d'administration pour la gestion du contenu et des demandes",
-    ],
-    impact: "Vitrine digitale valorisant l'hôtel et la culture locale, avec réservation en ligne facilitée pour les clients",
-    technologies: ["Next.js", "React.js", "TanStack Query", "React Hook Form", "Zod"],
-    image: "/assets/image/hotel_korhogo.jpg",
-    link: "https://hotel-korhogo.vercel.app/",
-    github: "#",
-    type: "Freelance",
-    accent: "#8C5A2E",
-  },
-];
+type Project = (typeof projects)[number];
 
-const containerVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.06 },
-  },
-};
+/* Les six projets mis en avant, dans l'ordre d'affichage ; les autres vont dans la grille. */
+const FEATURED = ["Dri Valé", "Mon Djossi", "Chicken-Nation", "Turbo ERP", "Luxury Home Abidjan", "Paroisse St Sauveur"];
+const shortTitle = (p: Project) => p.title.split(" — ")[0];
+const featured = FEATURED.map((name) => projects.find((p) => shortTitle(p) === name)).filter((p): p is Project => Boolean(p));
+const others = projects.filter((p) => !FEATURED.includes(shortTitle(p)));
+const OTHERS_INITIAL = 6;
 
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: "easeOut" },
-  },
-};
+const isLive = (p: Project) => Boolean(p.link) && p.link !== "#";
+const domainOf = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/.*$/, "");
+/* Les logos (petites images) s'affichent entiers sur fond clair ; les captures remplissent le cadre. */
+const isLogo = (p: Project) => p.image.includes("logo");
 
-export const Projects = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+/** Cadre de navigateur : barre d'adresse avec le domaine, puis la photo du projet. */
+function BrowserFrame({ project, imageScale, sizes }: { project: Project; imageScale?: MotionValue<number>; sizes: string }) {
+  const logo = isLogo(project);
+  return (
+    <div className="overflow-hidden rounded-xl bg-white shadow-[0_30px_60px_-20px_rgba(0,0,0,0.45)] ring-1 ring-black/10">
+      <div className="flex items-center gap-2 border-b border-black/5 bg-[#F3F4F6] px-3 py-2">
+        <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
+        <span className="ml-2 min-w-0 flex-1 truncate rounded-md bg-white px-3 py-1 text-center text-[11px] font-medium text-[#5F6368]">
+          {isLive(project) ? domainOf(project.link) : "Projet interne"}
+        </span>
+      </div>
+      <div className="relative aspect-[16/10] overflow-hidden bg-white">
+        <motion.div className="absolute inset-0" style={imageScale ? { scale: imageScale } : undefined}>
+          <Image
+            src={project.image}
+            alt={`Capture du projet ${shortTitle(project)}`}
+            fill
+            sizes={sizes}
+            className={logo ? "object-contain p-10" : "object-cover object-top"}
+          />
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+/** Une carte de la pile : elle reste collée en haut et rétrécit quand la suivante vient la recouvrir. */
+function StackCard({ project, index, progress, stacked }: { project: Project; index: number; progress: MotionValue<number>; stacked: boolean }) {
+  const total = featured.length;
+  const scale = useTransform(progress, [index / total, 1], [1, 1 - (total - 1 - index) * 0.035]);
+  const imageScale = useTransform(progress, [index / total, (index + 1) / total], [1.12, 1]);
+  const live = isLive(project);
 
   return (
-    <section id="projects" className="py-20 lg:py-28 px-4">
-      <div className="container mx-auto">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            className="mb-14 lg:mb-16 max-w-2xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="eyebrow">03 — Dossier de projets</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold mt-3 mb-4">
-              Systèmes livrés en production
-            </h2>
-            <p className="text-base lg:text-lg text-muted-foreground">
-              {projects.length} projets — plateformes de gestion, back-offices et sites livrés pour des entreprises, commerces et institutions.
-            </p>
-          </motion.div>
+    <div className={cn(stacked ? "sticky top-0 flex h-screen items-center" : "py-3")}>
+      <motion.article
+        style={stacked ? { scale, top: `${index * 22}px`, backgroundColor: project.accent } : { backgroundColor: project.accent }}
+        className="relative w-full origin-top overflow-hidden rounded-[1.75rem] p-6 text-white sm:p-10"
+        aria-label={shortTitle(project)}
+      >
+        {/* Lumière douce pour que la couleur ne soit pas un aplat */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_100%_0%,rgba(255,255,255,0.18),transparent_55%),radial-gradient(90%_70%_at_0%_100%,rgba(0,0,0,0.28),transparent_60%)]" />
 
-          <motion.div
-            ref={ref}
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6"
-          >
-            {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                variants={cardVariants}
-                className="dossier-card flex flex-col"
-                style={{ borderTopWidth: "3px", borderTopColor: project.accent }}
+        <div className="relative flex flex-wrap items-center justify-between gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+          <span>
+            {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")} · {project.code}
+          </span>
+          <span className="rounded-full border border-white/30 px-3 py-1">{project.type}</span>
+        </div>
+
+        <div className="relative mt-6 grid gap-8 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-12">
+          <div>
+            <h3 className="display-xl text-[clamp(2.6rem,5.5vw,4.75rem)] leading-[0.95]">{shortTitle(project)}</h3>
+            <p className="mt-4 text-base leading-relaxed text-white/85">{project.description}</p>
+            <ul className="mt-4 space-y-1.5 text-sm text-white/75">
+              {project.tasks?.slice(0, 3).map((t) => (
+                <li key={t} className="flex gap-3">
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-white" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+            {project.impact && <p className="mt-4 border-l-2 border-white/60 pl-4 text-sm font-semibold">{project.impact}</p>}
+            <div className="mt-5 flex flex-wrap gap-2">
+              {project.technologies?.map((t) => (
+                <span key={t} className="rounded-full bg-white/12 px-3 py-1 text-xs font-medium ring-1 ring-white/20">
+                  {t}
+                </span>
+              ))}
+            </div>
+            {live ? (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mt-6 inline-flex items-center gap-3 rounded-full bg-white py-2 pl-5 pr-2 text-sm font-bold text-[#0B0B0C] transition-transform hover:-translate-y-0.5"
               >
-                {/* Header */}
-                <div className="flex items-start gap-3 p-4 border-b border-border">
-                  <div className="w-11 h-11 shrink-0 border border-border bg-muted flex items-center justify-center overflow-hidden">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      width={44}
-                      height={44}
-                      className="w-8 h-8 object-contain"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="eyebrow" style={{ color: project.accent }}>{project.code}</span>
-                      <Badge variant={project.type === "Professionnel" ? "default" : "secondary"}>
-                        {project.type}
-                      </Badge>
-                    </div>
-                    <h3 className="font-display font-semibold text-base leading-snug mt-1">
-                      {project.title}
-                    </h3>
-                  </div>
-                </div>
+                Voir le site en ligne
+                <span className="grid h-8 w-8 place-items-center rounded-full bg-[#0B0B0C] text-white transition-transform duration-300 group-hover:rotate-45" aria-hidden="true">
+                  ↗
+                </span>
+              </a>
+            ) : (
+              <p className="mt-6 text-sm font-semibold text-white/70">Projet interne, pas de lien public</p>
+            )}
+          </div>
+          <BrowserFrame project={project} imageScale={stacked ? imageScale : undefined} sizes="(max-width: 1024px) 100vw, 600px" />
+        </div>
+      </motion.article>
+    </div>
+  );
+}
 
-                {/* Body */}
-                <div className="flex flex-col flex-1 p-4 gap-4">
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {project.description}
-                  </p>
+/** Carte compacte de la grille « Autres projets ». */
+function OtherCard({ project }: { project: Project }) {
+  const live = isLive(project);
+  const Wrapper = live ? "a" : "div";
+  return (
+    <Wrapper
+      {...(live ? { href: project.link, target: "_blank", rel: "noopener noreferrer" } : {})}
+      className="group block rounded-2xl bg-card p-3 ring-1 ring-foreground/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+    >
+      <div className="overflow-hidden rounded-xl transition-transform duration-500 group-hover:scale-[1.02]">
+        <BrowserFrame project={project} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px" />
+      </div>
+      <div className="px-2 pb-2 pt-4">
+        <div className="flex items-center justify-between gap-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          <span>{project.code}</span>
+          <span>{project.type}</span>
+        </div>
+        <h3 className="mt-2 font-body text-xl font-semibold tracking-normal">{shortTitle(project)}</h3>
+        <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
+        <p className="mt-4 text-sm font-semibold">
+          {live ? (
+            <span className="inline-flex items-center gap-1.5">
+              {domainOf(project.link)}
+              <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" aria-hidden="true">
+                ↗
+              </span>
+            </span>
+          ) : (
+            <span className="text-muted-foreground">Projet interne</span>
+          )}
+        </p>
+      </div>
+    </Wrapper>
+  );
+}
 
-                  <div>
-                    <span className="eyebrow block mb-2">Contributions</span>
-                    <ul className="space-y-1.5">
-                      {project.tasks.map((task, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-xs text-muted-foreground leading-relaxed">
-                          <span className="font-mono text-[10px] mt-0.5 shrink-0" style={{ color: project.accent }}>→</span>
-                          <span>{task}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+/** Projets : pile de cartes collantes pour les six phares, puis la grille des autres. */
+export const Projects = () => {
+  const stackRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: stackRef, offset: ["start start", "end end"] });
+  const desktop = useMediaQuery("(min-width: 1024px) and (min-height: 700px)");
+  const reduce = useSafeReducedMotion();
+  const stacked = desktop && !reduce;
+  const [showAll, setShowAll] = useState(false);
+  const list = showAll ? others : others.slice(0, OTHERS_INITIAL);
 
-                  <div className="pl-3 border-l-2 text-xs leading-relaxed" style={{ borderColor: project.accent }}>
-                    <span className="font-mono text-[10px] tracking-wide uppercase" style={{ color: project.accent }}>Impact — </span>
-                    <span className="text-muted-foreground">{project.impact}</span>
-                  </div>
+  return (
+    <section id="projects" className="bg-background px-5 py-24 sm:px-10 sm:py-32">
+      <div className="mx-auto max-w-6xl">
+        <div className="flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Projets sélectionnés · 03 / 04</p>
+            <h2 className="display-xl mt-4 text-[clamp(3.5rem,10vw,8.5rem)]">
+              <MaskReveal lines={["Mes projets"]} />
+            </h2>
+            <FadeUp>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+                Des applications en production, utilisées par des boutiques, des entreprises et des institutions. Chaque carte mène
+                au site en ligne.
+              </p>
+            </FadeUp>
+          </div>
+          <RotatingBadge href="#contact" text="Me contacter" />
+        </div>
 
-                  <div className="flex flex-wrap gap-1.5 mt-auto">
-                    {project.technologies.map((tech, idx) => (
-                      <Badge key={idx} variant="outline">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
+        <div ref={stackRef} className="mt-14">
+          {featured.map((p, i) => (
+            <StackCard key={p.title} project={p} index={i} progress={scrollYProgress} stacked={stacked} />
+          ))}
+        </div>
 
-                  <div className="flex gap-2 pt-1">
-                    {project.link && project.link !== "#" ? (
-                      <Button size="sm" variant="outline" className="flex-1 gap-1.5" asChild>
-                        <a href={project.link} target="_blank" rel="noopener noreferrer">
-                          <ArrowUpRight className="w-3.5 h-3.5" />
-                          Voir en ligne
-                        </a>
-                      </Button>
-                    ) : (
-                      <div className="flex-1 flex items-center justify-center text-xs text-muted-foreground py-1.5 border border-dashed border-border">
-                        Projet interne
-                      </div>
-                    )}
-                    {project.github && project.github !== "#" && (
-                      <Button size="sm" variant="ghost" className="gap-1.5" asChild>
-                        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label="Code source">
-                          <Github className="w-3.5 h-3.5" />
-                        </a>
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+        <div className="mt-24">
+          <div className="flex items-end justify-between gap-6">
+            <h3 className="display-xl text-[clamp(2.5rem,6vw,4.5rem)]">
+              <MaskReveal lines={["Autres projets"]} />
+            </h3>
+            <p className="mb-2 text-sm font-semibold text-muted-foreground">{others.length} projets</p>
+          </div>
+          <motion.ul layout className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <AnimatePresence initial={false}>
+              {list.map((p) => (
+                <motion.li
+                  key={p.title}
+                  layout
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: reduce ? 0 : 0.5, ease: EASE_OUT }}
+                >
+                  <OtherCard project={p} />
+                </motion.li>
+              ))}
+            </AnimatePresence>
+          </motion.ul>
+          {others.length > OTHERS_INITIAL && (
+            <div className="mt-10 text-center">
+              <button
+                type="button"
+                onClick={() => setShowAll((v) => !v)}
+                aria-expanded={showAll}
+                className="rounded-full border-2 border-foreground px-6 py-3 text-sm font-bold uppercase tracking-wide transition-colors hover:bg-foreground hover:text-background"
+              >
+                {showAll ? "Afficher moins" : `Voir les ${others.length - OTHERS_INITIAL} autres projets`}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>

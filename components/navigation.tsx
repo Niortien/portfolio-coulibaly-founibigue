@@ -1,159 +1,116 @@
-"use client"
+"use client";
 
-import { Menu, X } from "lucide-react";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { Fragment, useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { EASE_OUT } from "@/components/motion";
 
 const navItems = [
-  { name: "Accueil", href: "#hero" },
-  { name: "Expérience", href: "#experience" },
+  { name: "À propos", href: "#about" },
+  { name: "Parcours", href: "#experience" },
   { name: "Projets", href: "#projects" },
   { name: "Compétences", href: "#skills" },
-  { name: "Formation", href: "#education" },
-  { name: "Contact", href: "#contact" },
 ];
 
-const sectionIds = ["hero", "experience", "projects", "skills", "education", "contact"];
-
+/** Barre en pilule blanche (style « Design by Matthew ») : se cache en descendant, revient en remontant. */
 export const Navigation = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
+  const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (y) => {
+    const prev = scrollY.getPrevious() ?? 0;
+    setHidden(y > 160 && y > prev && !open);
+  });
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
-        { threshold: 0.35 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
+    document.body.style.overflow = open ? "hidden" : "";
+  }, [open]);
 
   return (
-    <motion.nav
-      className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-300 border-b ${
-        scrolled ? "bg-background/95 backdrop-blur-sm border-border" : "bg-transparent border-transparent"
-      }`}
-      initial={{ y: -60, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-    >
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-[4.5rem]">
-
-          {/* Logo */}
-          <a href="#hero" className="flex items-center gap-2.5 group">
-            <div className="flex h-8 w-8 items-center justify-center border border-primary/40 text-primary">
-              <span className="font-mono font-medium text-[11px]">CI</span>
-            </div>
-            <span className="text-sm font-display font-semibold tracking-tight hidden sm:block">
-              Coulibaly Issa
+    <>
+      <motion.header
+        className="fixed inset-x-0 top-3 z-50 px-3 sm:top-5 sm:px-6"
+        animate={{ y: hidden ? -110 : 0 }}
+        transition={{ duration: 0.45, ease: EASE_OUT }}
+      >
+        <nav
+          aria-label="Navigation principale"
+          className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 rounded-2xl border border-border/60 bg-card/95 px-3 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.18)] backdrop-blur sm:h-16 sm:px-4"
+        >
+          <a href="#hero" className="flex items-center gap-3" aria-label="Retour en haut">
+            <span className="grid h-9 w-9 place-items-center rounded-lg bg-foreground font-display text-sm text-background">CN</span>
+            <span className="hidden text-sm tracking-wide sm:block">
+              PORTFOLIO DE <strong className="font-bold">NIORTIEN</strong>
             </span>
           </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => {
-              const sectionId = item.href.replace("#", "");
-              const isActive = activeSection === sectionId;
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="relative px-3.5 py-2 text-sm font-body transition-colors"
-                >
-                  <span className={isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"}>
+          <ul className="hidden items-center gap-3 text-[13px] font-semibold uppercase tracking-wide md:flex">
+            {navItems.map((item, i) => (
+              <Fragment key={item.href}>
+                {i > 0 && <li aria-hidden="true" className="text-muted-foreground">/</li>}
+                <li>
+                  <a href={item.href} className="ink-link text-foreground/80 transition-colors hover:text-foreground">
                     {item.name}
-                  </span>
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-indicator"
-                      className="absolute left-3.5 right-3.5 -bottom-[1px] h-[2px] bg-primary"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
-                    />
-                  )}
-                </Link>
-              );
-            })}
-            <ThemeToggle />
-          </div>
+                  </a>
+                </li>
+              </Fragment>
+            ))}
+          </ul>
 
-          {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex items-center gap-2">
             <ThemeToggle />
-            <button
-              className="flex h-9 w-9 items-center justify-center border border-border cursor-pointer"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Ouvrir le menu"
+            <a
+              href="#contact"
+              className="hidden rounded-xl border border-foreground px-4 py-2 text-[13px] font-bold uppercase tracking-wide transition-colors hover:bg-foreground hover:text-background sm:block"
             >
-              <AnimatePresence mode="wait">
-                {isOpen ? (
-                  <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                    <X className="h-4 w-4" />
-                  </motion.span>
-                ) : (
-                  <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                    <Menu className="h-4 w-4" />
-                  </motion.span>
-                )}
-              </AnimatePresence>
+              Me contacter
+            </a>
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={open}
+              className="grid h-9 w-9 place-items-center rounded-lg border border-border md:hidden"
+            >
+              <span className="relative block h-3 w-4">
+                <span className={`absolute left-0 h-[1.5px] w-4 bg-current transition-all duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
+                <span className={`absolute left-0 h-[1.5px] w-4 bg-current transition-all duration-300 ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
+              </span>
             </button>
           </div>
-        </div>
+        </nav>
+      </motion.header>
 
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              className="md:hidden pb-4"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="flex flex-col gap-1 pt-2 border-t border-border">
-                {navItems.map((item, i) => {
-                  const isActive = activeSection === item.href.replace("#", "");
-                  return (
-                    <motion.div
-                      key={item.name}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.05 }}
-                    >
-                      <Link
-                        href={item.href}
-                        className={`flex items-center gap-3 px-3 py-2.5 text-sm font-body border-l-2 ${
-                          isActive
-                            ? "text-primary border-l-primary bg-secondary/50"
-                            : "text-muted-foreground border-l-transparent hover:text-foreground hover:bg-secondary/30"
-                        }`}
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </motion.nav>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="fixed inset-0 z-40 flex flex-col justify-end bg-ink px-6 pb-12 pt-28 text-ink-foreground md:hidden"
+            initial={{ clipPath: "inset(0 0 100% 0)" }}
+            animate={{ clipPath: "inset(0 0 0% 0)" }}
+            exit={{ clipPath: "inset(0 0 100% 0)" }}
+            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+          >
+            <ul className="space-y-2">
+              {[...navItems, { name: "Contact", href: "#contact" }].map((item, i) => (
+                <li key={item.href} className="overflow-hidden">
+                  <motion.a
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="display-xl block text-6xl"
+                    initial={{ y: "110%" }}
+                    animate={{ y: "0%" }}
+                    transition={{ duration: 0.7, ease: EASE_OUT, delay: 0.2 + i * 0.07 }}
+                  >
+                    {item.name}
+                  </motion.a>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-10 text-sm text-ink-foreground/60">niortiencoulibaly2001@gmail.com</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
